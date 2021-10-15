@@ -1,0 +1,205 @@
+type Query {
+  me: UserResponse!
+  constants(pageNumber: Float, page: Float, id: Float): ListConst
+}
+
+type UserResponse {
+  user: User
+}
+
+type User {
+  id: ID!
+  email: String!
+  pseudo: String!
+  updateAt: DateTime!
+  createdAt: DateTime!
+  premium: Boolean!
+  terrains: [Terrain!]
+  semis: [Semis!]
+  pot: [Pot!]
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type Terrain {
+  id: ID!
+  height: Float!
+  width: Float!
+  bgColor: String!
+  legumes: [Legume!]
+  user: User!
+}
+
+type Legume {
+  id: ID!
+  posX: Float
+  posY: Float
+  label: String!
+  subName: String
+  bgColor: String!
+  recolteDate: DateTime!
+  plantDate: DateTime
+  notifs: [Notif!]
+  height: Float!
+  width: Float!
+  image: URL
+  terrain: Terrain!
+}
+
+type Notif {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  endDate: DateTime!
+  done: Boolean!
+  notifRappel: [DateTime!]
+  legume: Legume!
+}
+
+"""
+The URL scalar type represents URL addresses.
+"""
+scalar URL
+
+type Semis {
+  id: ID!
+  label: String!
+  column: Int!
+  row: Int!
+  elements: [SemiElement!]!
+  user: User!
+}
+
+type SemiElement {
+  id: ID!
+  label: String!
+  recolteDate: DateTime!
+  plantDate: DateTime!
+  posColumn: Int!
+  posRow: Int!
+  image: URL!
+  semis: Semis!
+}
+
+type Pot {
+  id: Int!
+  name: String!
+  user: User!
+}
+
+type ListConst {
+  legumeList: [LegumeConst!]
+  legume: LegumeConst
+  aromatList: [AromatConst!]
+  armoat: AromatConst
+  arbreList: [ArbreConst!]
+  arbre: ArbreConst
+  totalCountArbre: Int
+  totalCountLegume: Int
+  totalCountAromat: Int
+}
+
+type LegumeConst {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
+
+type AromatConst {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
+
+type ArbreConst {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
+
+type Mutation {
+  addLegume(legumeId: Float!, terrainId: Float!, legume: LegumeInput!): Boolean!
+  addTerrain(terrain: TerrainInput!): Boolean!
+  changePassword(
+    newPassword: String!
+    oldPassword: String!
+  ): ConnectionResponse!
+  refreshToken: ConnectionResponse!
+  connect(password: String!, emailOrUsername: String!): ConnectionResponse!
+  register(
+    password: String!
+    pseudo: String!
+    email: String!
+  ): ConnectionResponse!
+  addLegumeConst(constant: LegumeConstInput!): Boolean!
+  addAromatConst(constant: AromatConstInput!): Boolean!
+  addArbreConst(constant: ArbreConstInput!): Boolean!
+  removeArbreConst(id: Float!): Boolean!
+  removeLegumeConst(id: Float!): Boolean!
+  removeAromatConst(id: Float!): Boolean!
+}
+
+input LegumeInput {
+  bgColor: String!
+  width: Int!
+  height: Int!
+  recolteDate: DateTime!
+  plantDate: DateTime
+}
+
+input TerrainInput {
+  width: Float!
+  height: Float!
+  bgColor: String!
+}
+
+type ConnectionResponse {
+  token: Token
+  error: ErrorType
+}
+
+type Token {
+  access: String!
+  refresh: String!
+}
+
+type ErrorType {
+  label: String!
+  message: String!
+}
+
+input LegumeConstInput {
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
+
+input AromatConstInput {
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
+
+input ArbreConstInput {
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
