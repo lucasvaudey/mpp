@@ -5,6 +5,7 @@ import 'package:mpp/models/semis.dart';
 import 'package:mpp/models/terrain.dart';
 import 'package:mpp/models/token.dart';
 import 'package:mpp/models/user.dart';
+import 'package:mpp/page/connection/login.dart';
 import 'package:mpp/page/splash_screen.dart';
 import 'package:mpp/page/unknown_screen.dart';
 import 'package:mpp/provider/app_provider.dart';
@@ -32,7 +33,6 @@ class MyApp extends StatelessWidget {
       create: (context) => AppProvider(),
       child: Consumer<AppProvider>(builder: (context, appProvider, child) {
         return MaterialApp(
-          initialRoute: SplashScreen.route,
           routes: appProvider.routes,
           onGenerateRoute: (settings) {
             if (settings.name == null) {
