@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpp/const/color.dart';
 import 'package:mpp/provider/login_provider.dart';
 import 'package:mpp/utils/size_config.dart';
@@ -43,6 +44,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       create: (context) => LoginProvider(context),
       child: Consumer<LoginProvider>(
         builder: (context, provider, child) => Scaffold(
+          backgroundColor: kBrown,
           body: Opacity(
             opacity: _fadeAnimation.value,
             child: Form(
@@ -53,6 +55,38 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 children: [
                   TextFormField(
                     controller: provider.emailController,
+                    maxLines: 1,
+                    cursorColor: kPrimary,
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.r)),
+                        borderSide:
+                            const BorderSide(color: kPrimary, width: 0.5),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderSide: BorderSide(color: kPrimary, width: 0.5),
+                      ),
+                      focusedErrorBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderSide: BorderSide(color: kPrimary, width: 0.5),
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderSide: BorderSide(color: Colors.red, width: 0.5),
+                      ),
+                      fillColor: kLightPink,
+                      filled: true,
+                      label: Text("Email ou pseudo :",
+                          style: TextStyle(fontSize: sizeConfig.sizeH(20))),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  TextFormField(
+                    controller: provider.passwordController,
                     maxLines: 1,
                     cursorColor: kPrimary,
                     decoration: InputDecoration(
@@ -75,11 +109,22 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                       fillColor: kLightPink,
                       filled: true,
-                      label: Text("Email ou pseudo :",
-                          style: TextStyle(fontSize: sizeConfig.sizeH(20))),
+                      label: Text(
+                        "Mot de passe",
+                        style: TextStyle(fontSize: 20.sp),
+                      ),
                     ),
+                    obscureText: true,
                   ),
-                  TextFormField(),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      provider.signIn();
+                    },
+                    child: const Text("Validate"),
+                  ),
                 ],
               ),
             ),

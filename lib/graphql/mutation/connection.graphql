@@ -8,5 +8,13 @@ mutation Connection($password: String!, $emailOrUsername: String!) {
       label
       message
     }
+    user {
+      id
+      email
+      pseudo
+      terrains {
+        id
+      }
+    }
   }
 }

@@ -25,7 +25,6 @@ class AppProvider extends ChangeNotifier {
   void addUserRoute() {
     routes[HomePage.route] = (context) => const HomePage();
     notifyListeners();
-    //TODO: add admin route
   }
 
   void addPremiumRoute() {

@@ -48,6 +48,48 @@ class Connection$Mutation$ConnectionResponse$ErrorType extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
+class Connection$Mutation$ConnectionResponse$User$Terrain
+    extends JsonSerializable with EquatableMixin {
+  Connection$Mutation$ConnectionResponse$User$Terrain();
+
+  factory Connection$Mutation$ConnectionResponse$User$Terrain.fromJson(
+          Map<String, dynamic> json) =>
+      _$Connection$Mutation$ConnectionResponse$User$TerrainFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$Connection$Mutation$ConnectionResponse$User$TerrainToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Connection$Mutation$ConnectionResponse$User extends JsonSerializable
+    with EquatableMixin {
+  Connection$Mutation$ConnectionResponse$User();
+
+  factory Connection$Mutation$ConnectionResponse$User.fromJson(
+          Map<String, dynamic> json) =>
+      _$Connection$Mutation$ConnectionResponse$UserFromJson(json);
+
+  late String id;
+
+  late String email;
+
+  late String pseudo;
+
+  List<Connection$Mutation$ConnectionResponse$User$Terrain>? terrains;
+
+  @override
+  List<Object?> get props => [id, email, pseudo, terrains];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$Connection$Mutation$ConnectionResponse$UserToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class Connection$Mutation$ConnectionResponse extends JsonSerializable
     with EquatableMixin {
   Connection$Mutation$ConnectionResponse();
@@ -60,8 +102,10 @@ class Connection$Mutation$ConnectionResponse extends JsonSerializable
 
   Connection$Mutation$ConnectionResponse$ErrorType? error;
 
+  Connection$Mutation$ConnectionResponse$User? user;
+
   @override
-  List<Object?> get props => [token, error];
+  List<Object?> get props => [token, error, user];
   @override
   Map<String, dynamic> toJson() =>
       _$Connection$Mutation$ConnectionResponseToJson(this);
@@ -170,6 +214,44 @@ final CONNECTION_MUTATION_DOCUMENT = DocumentNode(definitions: [
                         arguments: [],
                         directives: [],
                         selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'user'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'email'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'pseudo'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'terrains'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'id'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null)
+                        ]))
                   ]))
             ]))
       ]))

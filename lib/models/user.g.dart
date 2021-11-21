@@ -19,30 +19,36 @@ class UserAdapter extends TypeAdapter<User> {
     return User(
       id: fields[0] as int,
       pseudo: fields[1] as String,
-      terrains: (fields[4] as List?)?.cast<Terrain>(),
-      admin: fields[3] as bool,
-      premium: fields[2] as bool,
-      pots: (fields[5] as List?)?.cast<Pot>(),
-    )..semis = (fields[6] as List?)?.cast<Semis>();
+      email: fields[2] as String,
+      token: fields[3] as Token,
+      terrains: (fields[6] as List?)?.cast<Terrain>(),
+      admin: fields[5] as bool,
+      premium: fields[4] as bool,
+      pots: (fields[7] as List?)?.cast<Pot>(),
+    )..semis = (fields[8] as List?)?.cast<Semis>();
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.pseudo)
       ..writeByte(2)
-      ..write(obj.premium)
+      ..write(obj.email)
       ..writeByte(3)
-      ..write(obj.admin)
+      ..write(obj.token)
       ..writeByte(4)
-      ..write(obj.terrains)
+      ..write(obj.premium)
       ..writeByte(5)
-      ..write(obj.pots)
+      ..write(obj.admin)
       ..writeByte(6)
+      ..write(obj.terrains)
+      ..writeByte(7)
+      ..write(obj.pots)
+      ..writeByte(8)
       ..write(obj.semis);
   }
 
@@ -61,24 +67,30 @@ class UserAdapter extends TypeAdapter<User> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: json['id'] as int,
-      pseudo: json['pseudo'] as String,
-      terrains: (json['terrains'] as List<dynamic>?)
-          ?.map((e) => Terrain.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      admin: json['admin'] as bool? ?? false,
-      premium: json['premium'] as bool? ?? false,
-      pots: (json['pots'] as List<dynamic>?)
-          ?.map((e) => Pot.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    )..semis = (json['semis'] as List<dynamic>?)
-        ?.map((e) => Semis.fromJson(e as Map<String, dynamic>))
-        .toList();
+User _$UserFromJson(Map<String, dynamic> json) {
+  return User(
+    id: json['id'] as int,
+    pseudo: json['pseudo'] as String,
+    email: json['email'] as String,
+    token: Token.fromJson(json['token'] as Map<String, dynamic>),
+    terrains: (json['terrains'] as List<dynamic>?)
+        ?.map((e) => Terrain.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    admin: json['admin'] as bool,
+    premium: json['premium'] as bool,
+    pots: (json['pots'] as List<dynamic>?)
+        ?.map((e) => Pot.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  )..semis = (json['semis'] as List<dynamic>?)
+      ?.map((e) => Semis.fromJson(e as Map<String, dynamic>))
+      .toList();
+}
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'pseudo': instance.pseudo,
+      'email': instance.email,
+      'token': instance.token,
       'premium': instance.premium,
       'admin': instance.admin,
       'terrains': instance.terrains,

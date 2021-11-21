@@ -8,7 +8,7 @@ class Graphql {
     Dio dio = Dio()
       ..interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
         if (token != null) {
-          options.headers["Authorization"] = token;
+          options.headers["Authorization"] = 'Bearer ' + token;
         }
         handler.next(options);
       }, onError: (DioError error, handler) {

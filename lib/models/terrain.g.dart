@@ -44,9 +44,11 @@ class TerrainAdapter extends TypeAdapter<Terrain> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Terrain _$TerrainFromJson(Map<String, dynamic> json) => Terrain(
-      id: json['id'] as int,
-    );
+Terrain _$TerrainFromJson(Map<String, dynamic> json) {
+  return Terrain(
+    id: json['id'] as int,
+  );
+}
 
 Map<String, dynamic> _$TerrainToJson(Terrain instance) => <String, dynamic>{
       'id': instance.id,

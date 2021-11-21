@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mpp/models/pot.dart';
 import 'package:mpp/models/semis.dart';
 import 'package:mpp/models/terrain.dart';
+import 'package:mpp/models/token.dart';
 
 part 'user.g.dart';
 
@@ -16,23 +17,31 @@ class User {
   String pseudo;
 
   @HiveField(2)
-  bool premium = false;
+  String email;
 
   @HiveField(3)
-  bool admin = false;
+  Token token;
 
   @HiveField(4)
-  List<Terrain>? terrains;
+  bool premium = false;
 
   @HiveField(5)
-  List<Pot>? pots;
+  bool admin = false;
 
   @HiveField(6)
+  List<Terrain>? terrains;
+
+  @HiveField(7)
+  List<Pot>? pots;
+
+  @HiveField(8)
   List<Semis>? semis;
 
   User(
       {required this.id,
       required this.pseudo,
+      required this.email,
+      required this.token,
       this.terrains,
       this.admin = false,
       this.premium = false,

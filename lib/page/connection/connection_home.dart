@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mpp/const/assets.dart';
 import 'package:mpp/const/color.dart';
@@ -46,10 +47,10 @@ class _ConnectionHomeState extends State<ConnectionHome> {
             children: [
               SvgPicture.asset(
                 logoPath,
-                height: sizeConfig.sizeH(183),
+                height: 183.h,
               ),
               SizedBox(
-                height: sizeConfig.safeH(109),
+                height: 109.h,
               ),
               TextButton(
                 style: kConnectionButton,
@@ -61,7 +62,7 @@ class _ConnectionHomeState extends State<ConnectionHome> {
                 ),
               ),
               SizedBox(
-                height: sizeConfig.safeH(11),
+                height: 11.h,
               ),
               TextButton(
                 style: kConnectionButton,
