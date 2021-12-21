@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mpp/const/color.dart';
 import 'package:mpp/provider/login_provider.dart';
-import 'package:mpp/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -79,7 +78,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       fillColor: kLightPink,
                       filled: true,
                       label: Text("Email ou pseudo :",
-                          style: TextStyle(fontSize: sizeConfig.sizeH(20))),
+                          style: TextStyle(fontSize: 20.h)),
                     ),
                   ),
                   SizedBox(

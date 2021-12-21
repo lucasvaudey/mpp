@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/models/pot.dart';
 import 'package:mpp/models/semis.dart';
 import 'package:mpp/models/terrain.dart';
@@ -45,7 +46,19 @@ class User {
       this.terrains,
       this.admin = false,
       this.premium = false,
+      this.semis,
       this.pots});
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  static User fromMeQuery(Me$Query$Me$User data, Token token) {
+    return User(
+      id: int.parse(data.id),
+      pseudo: data.pseudo,
+      email: data.email,
+      token: token,
+      admin: data.admin,
+      premium: data.premium,
+    );
+  }
 }

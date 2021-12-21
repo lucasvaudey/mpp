@@ -8,7 +8,6 @@ import 'package:mpp/const/color.dart';
 import 'package:mpp/const/style.dart';
 import 'package:mpp/page/connection/login.dart';
 import 'package:mpp/page/connection/register.dart';
-import 'package:mpp/utils/size_config.dart';
 
 class ConnectionHome extends StatefulWidget {
   static const String route = '/connection';
@@ -39,7 +38,7 @@ class _ConnectionHomeState extends State<ConnectionHome> {
         opacity: isVisible ? 1.0 : 0.0,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: sizeConfig.safeW(27),
+            horizontal: 27.w,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

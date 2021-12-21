@@ -14,6 +14,7 @@ type User {
   updateAt: DateTime!
   createdAt: DateTime!
   premium: Boolean!
+  admin: Boolean!
   terrains: [Terrain!]
   semis: [Semis!]
   pot: [Pot!]

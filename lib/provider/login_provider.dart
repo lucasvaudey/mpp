@@ -1,13 +1,15 @@
 import 'dart:developer';
 
 import 'package:artemis/artemis.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
+import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/models/token.dart';
 import 'package:mpp/models/user.dart';
 import 'package:mpp/page/home_page.dart';
-import 'package:mpp/utils/graphql.dart';
-import 'package:mpp/graphql_api.dart';
+import 'package:mpp/page/splash_screen.dart';
 
 class LoginProvider extends ChangeNotifier {
   late BuildContext context;
@@ -19,7 +21,7 @@ class LoginProvider extends ChangeNotifier {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> signIn() async {
-    ArtemisClient _client = gql.getClient(null);
+    ArtemisClient _client = getClient(null);
     final response = await _client.execute(
       ConnectionMutation(
         variables: ConnectionArguments(
@@ -27,8 +29,8 @@ class LoginProvider extends ChangeNotifier {
             password: passwordController.text),
       ),
     );
-    print(response);
     if (response.hasErrors) {
+      print(response);
       //TODO: show errors !
       return;
     }
@@ -44,7 +46,7 @@ class LoginProvider extends ChangeNotifier {
             token: token);
         Hive.box<User>("user").put("current", user);
         Navigator.of(context)
-            .pushNamedAndRemoveUntil(HomePage.route, (route) => false);
+            .pushNamedAndRemoveUntil(SplashScreen.route, (route) => false);
       }
     }
   }

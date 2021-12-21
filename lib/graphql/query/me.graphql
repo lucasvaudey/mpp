@@ -1,0 +1,55 @@
+query Me {
+  me {
+    user {
+      id
+      email
+      pseudo
+      premium
+      admin
+      terrains {
+        id
+        height
+        bgColor
+        width
+        legumes {
+          bgColor
+          subName
+          label
+          posY
+          posX
+          id
+          recolteDate
+          notifs {
+            id
+            createdAt
+            done
+            notifRappel
+          }
+          plantDate
+          height
+          width
+          image
+        }
+      }
+      semis {
+        id
+        label
+        column
+        row
+        elements {
+          id
+          label
+          recolteDate
+          plantDate
+          posColumn
+          posRow
+          image
+        }
+      }
+      pot {
+        id
+        name
+      }
+    }
+  }
+}

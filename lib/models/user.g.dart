@@ -24,8 +24,9 @@ class UserAdapter extends TypeAdapter<User> {
       terrains: (fields[6] as List?)?.cast<Terrain>(),
       admin: fields[5] as bool,
       premium: fields[4] as bool,
+      semis: (fields[8] as List?)?.cast<Semis>(),
       pots: (fields[7] as List?)?.cast<Pot>(),
-    )..semis = (fields[8] as List?)?.cast<Semis>();
+    );
   }
 
   @override
@@ -78,22 +79,33 @@ User _$UserFromJson(Map<String, dynamic> json) {
         .toList(),
     admin: json['admin'] as bool,
     premium: json['premium'] as bool,
+    semis: (json['semis'] as List<dynamic>?)
+        ?.map((e) => Semis.fromJson(e as Map<String, dynamic>))
+        .toList(),
     pots: (json['pots'] as List<dynamic>?)
         ?.map((e) => Pot.fromJson(e as Map<String, dynamic>))
         .toList(),
-  )..semis = (json['semis'] as List<dynamic>?)
-      ?.map((e) => Semis.fromJson(e as Map<String, dynamic>))
-      .toList();
+  );
 }
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
-      'pseudo': instance.pseudo,
-      'email': instance.email,
-      'token': instance.token,
-      'premium': instance.premium,
-      'admin': instance.admin,
-      'terrains': instance.terrains,
-      'pots': instance.pots,
-      'semis': instance.semis,
-    };
+Map<String, dynamic> _$UserToJson(User instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'pseudo': instance.pseudo,
+    'email': instance.email,
+    'token': instance.token,
+    'premium': instance.premium,
+    'admin': instance.admin,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('terrains', instance.terrains);
+  writeNotNull('pots', instance.pots);
+  writeNotNull('semis', instance.semis);
+  return val;
+}
