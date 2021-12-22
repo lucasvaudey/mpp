@@ -1,0 +1,3 @@
+mutation RemoveConst($id: Int!) {
+  removeConst(id: $removeConstId)
+}

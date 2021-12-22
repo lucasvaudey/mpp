@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:artemis/artemis.dart';
 import 'package:flutter/widgets.dart';
@@ -62,8 +61,15 @@ class AppProvider extends ChangeNotifier {
   Future<void> getUserInfo(Token token) async {
     ArtemisClient _client = getClient(token.access);
     final response = await _client.execute(MeQuery());
+    //TODO: Refresh token here
     if (response.data?.me.user != null) {
       User newUser = User.fromMeQuery(response.data!.me.user!, token);
+      if (newUser.admin) {
+        addAdminRoute();
+      }
+      if (newUser.premium) {
+        addPremiumRoute();
+      }
       Hive.box<User>('user').put('current', newUser);
     }
   }

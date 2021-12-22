@@ -52,8 +52,9 @@ class User {
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   static User fromMeQuery(Me$Query$Me$User data, Token token) {
+    //TODO: Parsing the terrains, etc
     return User(
-      id: int.parse(data.id),
+      id: data.id,
       pseudo: data.pseudo,
       email: data.email,
       token: token,

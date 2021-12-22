@@ -30,6 +30,10 @@ targets:
               dart_type: double
             - graphql_type: EmailAddress
               dart_type: String
+            - graphql_type: ID
+              dart_type: int
+              use_custom_parser_import: true
+              custom_parser_import: "package:mpp/graphql/coercers.dart"
             - graphql_type: Upload
               custom_parser_import: "package:factory/graphql/coercers.dart"
               dart_type:

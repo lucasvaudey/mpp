@@ -1,6 +1,53 @@
+type LegumeConst implements ConstElement {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+  description: String
+}
+
+interface ConstElement {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+}
+
+"""
+The URL scalar type represents URL addresses.
+"""
+scalar URL
+
+type ArbreConst implements ConstElement {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+  description: String
+  fruitName: String
+}
+
+type AromatConst implements ConstElement {
+  id: ID!
+  label: String!
+  defaultBgColor: String!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+  description: String
+  taille: String
+}
+
 type Query {
   me: UserResponse!
-  constants(pageNumber: Float, page: Float, id: Float): ListConst
+  const(id: Float!): ConstElement
+  consts(pageNumber: Float!, numberInPage: Float!): [ConstElement!]
 }
 
 type UserResponse {
@@ -60,11 +107,6 @@ type Notif {
   legume: Legume!
 }
 
-"""
-The URL scalar type represents URL addresses.
-"""
-scalar URL
-
 type Semis {
   id: ID!
   label: String!
@@ -91,45 +133,6 @@ type Pot {
   user: User!
 }
 
-type ListConst {
-  legumeList: [LegumeConst!]
-  legume: LegumeConst
-  aromatList: [AromatConst!]
-  armoat: AromatConst
-  arbreList: [ArbreConst!]
-  arbre: ArbreConst
-  totalCountArbre: Int
-  totalCountLegume: Int
-  totalCountAromat: Int
-}
-
-type LegumeConst {
-  id: ID!
-  label: String!
-  defaultBgColor: String!
-  baseHeight: Float!
-  baseWidth: Float!
-  image: URL!
-}
-
-type AromatConst {
-  id: ID!
-  label: String!
-  defaultBgColor: String!
-  baseHeight: Float!
-  baseWidth: Float!
-  image: URL!
-}
-
-type ArbreConst {
-  id: ID!
-  label: String!
-  defaultBgColor: String!
-  baseHeight: Float!
-  baseWidth: Float!
-  image: URL!
-}
-
 type Mutation {
   addLegume(legumeId: Float!, terrainId: Float!, legume: LegumeInput!): Boolean!
   addTerrain(terrain: TerrainInput!): Boolean!
@@ -144,12 +147,8 @@ type Mutation {
     pseudo: String!
     email: String!
   ): ConnectionResponse!
-  addLegumeConst(constant: LegumeConstInput!): Boolean!
-  addAromatConst(constant: AromatConstInput!): Boolean!
-  addArbreConst(constant: ArbreConstInput!): Boolean!
-  removeArbreConst(id: Float!): Boolean!
-  removeLegumeConst(id: Float!): Boolean!
-  removeAromatConst(id: Float!): Boolean!
+  addConst(constant: ConstInput!): Boolean!
+  removeConst(id: Int!): Boolean!
 }
 
 input LegumeInput {
@@ -182,6 +181,12 @@ type ErrorType {
   message: String!
 }
 
+input ConstInput {
+  legume: LegumeConstInput
+  arbre: ArbreConstInput
+  aromat: AromatConstInput
+}
+
 input LegumeConstInput {
   label: String!
   defaultBgColor: String!
@@ -190,7 +195,7 @@ input LegumeConstInput {
   image: URL!
 }
 
-input AromatConstInput {
+input ArbreConstInput {
   label: String!
   defaultBgColor: String!
   baseHeight: Float!
@@ -198,7 +203,7 @@ input AromatConstInput {
   image: URL!
 }
 
-input ArbreConstInput {
+input AromatConstInput {
   label: String!
   defaultBgColor: String!
   baseHeight: Float!

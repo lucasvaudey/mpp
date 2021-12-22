@@ -1,0 +1,34 @@
+query AllConsts($pageNumber: Int!, $numberInPage: Int!) {
+  consts(pageNumber: $pageNumber, numberInPage: $numberInPage) {
+    __typename
+    ... on LegumeConst {
+      id
+      label
+      defaultBgColor
+      baseHeight
+      baseWidth
+      image
+      description
+    }
+    ... on ArbreConst {
+      id
+      baseHeight
+      label
+      defaultBgColor
+      baseWidth
+      description
+      image
+      fruitName
+    }
+    ... on AromatConst {
+      id
+      label
+      defaultBgColor
+      baseHeight
+      baseWidth
+      image
+      description
+      taille
+    }
+  }
+}

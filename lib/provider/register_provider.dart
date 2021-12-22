@@ -31,7 +31,7 @@ class RegisterProvider extends ChangeNotifier {
     if (response.data?.register.token != null &&
         response.data?.register.user?.id != null) {
       User newUser = User(
-          id: int.parse(response.data!.register.user!.id),
+          id: response.data!.register.user!.id,
           pseudo: pseudo,
           email: email,
           token: Token(

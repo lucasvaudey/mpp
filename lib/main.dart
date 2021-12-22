@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/models/const/const_element.dart';
 import 'package:mpp/models/pot.dart';
 import 'package:mpp/models/semis.dart';
 import 'package:mpp/models/terrain.dart';
@@ -20,6 +21,7 @@ void main() async {
     ..registerAdapter(PotAdapter())
     ..registerAdapter(TokenAdapter());
   await Hive.openBox<User>("user");
+  await Hive.openBox<ConstElement>("const_element");
   runApp(const MyApp());
 }
 

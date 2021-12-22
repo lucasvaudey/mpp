@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:artemis/artemis.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/models/token.dart';
 import 'package:mpp/models/user.dart';
-import 'package:mpp/page/home_page.dart';
 import 'package:mpp/page/splash_screen.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -40,7 +36,7 @@ class LoginProvider extends ChangeNotifier {
             access: response.data!.connect.token!.access,
             refresh: response.data!.connect.token!.access);
         User user = User(
-            id: int.parse(response.data!.connect.user!.id),
+            id: response.data!.connect.user!.id,
             pseudo: response.data!.connect.user!.pseudo,
             email: response.data!.connect.user!.email,
             token: token);

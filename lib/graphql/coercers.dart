@@ -81,3 +81,12 @@ List<MultipartFile?>
     fromDartListMultipartFileNullableToGraphQLListUploadNullable(
             List<MultipartFile?> file) =>
         file;
+
+///ID
+int fromGraphQLIdToDartint(String id) {
+  return int.parse(id);
+}
+
+int fromDartintToGraphQLId(int id) {
+  return id;
+}

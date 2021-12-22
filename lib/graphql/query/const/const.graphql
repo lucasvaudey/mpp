@@ -1,0 +1,34 @@
+query Const($constId: Int!) {
+  const(id: $constId) {
+    __typename
+    ... on LegumeConst {
+      description
+      label
+      defaultBgColor
+      baseHeight
+      baseWidth
+      image
+      id
+    }
+    ... on ArbreConst {
+      id
+      label
+      defaultBgColor
+      baseHeight
+      baseWidth
+      image
+      description
+      fruitName
+    }
+    ... on AromatConst {
+      label
+      id
+      defaultBgColor
+      baseHeight
+      baseWidth
+      image
+      description
+      taille
+    }
+  }
+}
