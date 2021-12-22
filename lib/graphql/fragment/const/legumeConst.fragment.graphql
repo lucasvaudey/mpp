@@ -1,0 +1,9 @@
+fragment LegumeCFrag on LegumeConst {
+  id
+  label
+  defaultBgColor
+  baseHeight
+  baseWidth
+  image
+  description
+}

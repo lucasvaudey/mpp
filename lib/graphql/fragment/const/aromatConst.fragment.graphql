@@ -1,0 +1,10 @@
+fragment AromatCFrag on AromatConst {
+  id
+  label
+  defaultBgColor
+  baseHeight
+  baseWidth
+  image
+  description
+  taille
+}

@@ -17,7 +17,7 @@ class ArbreConstAdapter extends TypeAdapter<ArbreConst> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ArbreConst(
-      id: fields[0] as dynamic,
+      id: fields[0] as int,
       familyName: fields[1] as String,
     );
   }
@@ -49,7 +49,7 @@ class ArbreConstAdapter extends TypeAdapter<ArbreConst> {
 
 ArbreConst _$ArbreConstFromJson(Map<String, dynamic> json) {
   return ArbreConst(
-    id: json['id'],
+    id: json['id'] as int,
     familyName: json['familyName'] as String,
   );
 }

@@ -6,11 +6,12 @@ targets:
           include_if_null: false
       artemis:
         options:
+          fragments_glob: lib/graphql/fragment/**/*.fragment.graphql
           schema_mapping:
             - output: lib/graphql/generated/graphql_api.dart
               naming_scheme: pathedWithFields
               schema: lib/graphql/schema.graphql
-              queries_glob: lib/graphql/**/*.graphql
+              queries_glob: lib/graphql/queries_glob/**/*.graphql
           scalar_mapping:
             - graphql_type: JSON
               dart_type: Map<String, dynamic>

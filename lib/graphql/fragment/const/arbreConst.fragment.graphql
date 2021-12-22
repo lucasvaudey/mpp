@@ -1,0 +1,10 @@
+fragment ArbreCFrag on ArbreConst {
+  id
+  baseHeight
+  label
+  defaultBgColor
+  baseWidth
+  description
+  image
+  fruitName
+}
