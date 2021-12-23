@@ -6,5 +6,24 @@ fragment ArbreCFrag on ArbreConst {
   baseWidth
   description
   image
-  fruitName
+  advices
+  expostion
+  plantMonth
+  recolteMonth
+  semisMonth
+  climatDesc
+  tailleDesc
+  recolteDesc
+  tailleMonth
+  rusticity
+  varieties {
+    id
+    image
+    label
+  }
+  sickness {
+    id
+    label
+    description
+  }
 }

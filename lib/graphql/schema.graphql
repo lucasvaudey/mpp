@@ -5,7 +5,50 @@ type LegumeConst implements ConstElement {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
-  description: String
+
+  """
+  Short description of the constants
+  """
+  description: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  sickness: [Sickness!]
+  varieties: [Variety!]
+  expostion: exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Int!]
+
+  """
+  Description of the soil needed
+  """
+  soilDesc: String!
+
+  """
+  Description of the culture & entretien needed
+  """
+  cultureDesc: String!
+
+  """
+  Description of the culture & entretien needed
+  """
+  recolteDesc: String!
+  friends: [LegumeConst!]!
 }
 
 interface ConstElement {
@@ -15,12 +58,64 @@ interface ConstElement {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
+
+  """
+  Short description of the constants
+  """
+  description: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  sickness: [Sickness!]
+  varieties: [Variety!]
+  expostion: exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Int!]
 }
 
 """
 The URL scalar type represents URL addresses.
 """
 scalar URL
+
+type Sickness {
+  id: ID!
+  label: String!
+  description: String!
+  constants: [ConstElement!]
+}
+
+type Variety {
+  id: ID!
+  image: URL!
+  label: String!
+  description: String!
+  constant: ConstElement!
+}
+
+"""
+Exposition type
+"""
+enum exposition {
+  SOLEIL
+  OMBRE
+  MI_OMBRE
+}
 
 type ArbreConst implements ConstElement {
   id: ID!
@@ -29,8 +124,64 @@ type ArbreConst implements ConstElement {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
-  description: String
-  fruitName: String
+
+  """
+  Short description of the constants
+  """
+  description: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  sickness: [Sickness!]
+  varieties: [Variety!]
+  expostion: exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Int!]
+
+  """
+  Description of the climat needed
+  """
+  climatDesc: String!
+
+  """
+  Description of the culture & entretien needed
+  """
+  tailleDesc: String!
+
+  """
+  Description of the culture & entretien needed
+  """
+  recolteDesc: String!
+
+  """
+  Give an array of months
+  """
+  tailleMonth: [Int!]!
+  rusticity: rusticity!
+}
+
+"""
+Rusticity type
+"""
+enum rusticity {
+  TRES_RUSTIQUE
+  RUSTIQUE
+  PEU_RUSTIQUE
 }
 
 type AromatConst implements ConstElement {
@@ -40,14 +191,45 @@ type AromatConst implements ConstElement {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
-  description: String
-  taille: String
+
+  """
+  Short description of the constants
+  """
+  description: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  sickness: [Sickness!]
+  varieties: [Variety!]
+  expostion: exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Int!]
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Int!]
+
+  """
+  Description of the soil needed
+  """
+  soilDesc: String!
 }
 
 type Query {
   me: UserResponse!
-  const(id: Float!): ConstElement
-  consts(pageNumber: Float!, numberInPage: Float!): [ConstElement!]
+  const(id: Int!): ConstElement
+  consts(pageNumber: Int!, numberInPage: Int!): [ConstElement!]
 }
 
 type UserResponse {
@@ -193,6 +375,15 @@ input LegumeConstInput {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
+  description: String!
+  cultureDesc: String!
+  advices: [String!]!
+  plantMonth: [Int!]!
+  recolteDesc: String!
+  recolteMonth: [Int!]!
+  semisMonth: [Int!]!
+  soilDesc: String!
+  expostion: exposition!
 }
 
 input ArbreConstInput {
@@ -201,6 +392,54 @@ input ArbreConstInput {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
+  description: String!
+
+  """
+  Description of the climat needed
+  """
+  climatDesc: String!
+
+  """
+  Description of the culture & entretien needed
+  """
+  tailleDesc: String!
+
+  """
+  Description of the culture & entretien needed
+  """
+  recolteDesc: String!
+
+  """
+  Give an array of months
+  """
+  tailleMonth: [Int!]!
+  rusticity: rusticity!
+
+  """
+  Description of the soil needed
+  """
+  soilDesc: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  expostion: exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Int!]!
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Int!]!
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Int!]!
 }
 
 input AromatConstInput {
@@ -209,4 +448,31 @@ input AromatConstInput {
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
+  description: String!
+
+  """
+  Description of the soil needed
+  """
+  soilDesc: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  expostion: exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Int!]!
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Int!]!
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Int!]!
 }

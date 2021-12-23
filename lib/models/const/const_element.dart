@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mpp/models/enums/hive_exposition.dart';
+import 'package:mpp/models/info/sickness.dart';
+import 'package:mpp/models/info/variety.dart';
 
 part 'const_element.g.dart';
 
@@ -8,8 +12,50 @@ part 'const_element.g.dart';
 class ConstElement {
   @HiveField(0)
   int id;
+  @HiveField(1)
+  String label;
+  //TODO: Changer ça en color
+  @HiveField(2)
+  String defaultBgColor;
+  @HiveField(3)
+  double baseHeight;
+  @HiveField(4)
+  double baseWidth;
+  @HiveField(5)
+  String image;
+  @HiveField(6)
+  String description;
+  @HiveField(7)
+  List<String>? advices;
+  @HiveField(8)
+  List<Sickness>? sickness;
+  @HiveField(9)
+  List<Variety>? varieties;
+  @HiveField(10)
+  HiveExposition exposition;
+  @HiveField(11)
+  List<int>? plantMonth;
+  @HiveField(12)
+  List<int>? semisMonth;
+  @HiveField(13)
+  List<int>? recolteMonth;
 
-  ConstElement({required this.id});
+  ConstElement({
+    required this.id,
+    required this.baseHeight,
+    required this.baseWidth,
+    required this.defaultBgColor,
+    required this.description,
+    required this.image,
+    required this.label,
+    required this.exposition,
+    this.advices,
+    this.sickness,
+    this.varieties,
+    this.plantMonth,
+    this.semisMonth,
+    this.recolteMonth,
+  });
 
   factory ConstElement.fromJson(Map<String, dynamic> json) =>
       _$ConstElementFromJson(json);

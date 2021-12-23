@@ -6,5 +6,4 @@ fragment AromatCFrag on AromatConst {
   baseWidth
   image
   description
-  taille
 }

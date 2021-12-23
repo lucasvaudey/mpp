@@ -4,6 +4,7 @@ import 'package:gql_dio_link/gql_dio_link.dart';
 import 'package:mpp/const/string.dart';
 
 ArtemisClient getClient(String? token) {
+  print(token);
   Dio dio = Dio()
     ..interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       if (token != null) {

@@ -18,7 +18,6 @@ query Const($constId: Int!) {
       baseWidth
       image
       description
-      fruitName
     }
     ... on AromatConst {
       label
@@ -28,7 +27,6 @@ query Const($constId: Int!) {
       baseWidth
       image
       description
-      taille
     }
   }
 }
