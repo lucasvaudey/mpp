@@ -52,4 +52,17 @@ class ArbreConst extends ConstElement {
 
   @override
   Map<String, dynamic> toJson() => _$ArbreConstToJson(this);
+
+  ArbreConst fromFrag(ArbreCFragMixin data) {
+    return ArbreConst(
+        id: data.id,
+        baseHeight: data.baseHeight,
+        baseWidth: data.baseWidth,
+        defaultBgColor: data.defaultBgColor,
+        description: data.description,
+        image: data.image,
+        label: data.label,
+        exposition: data.expostion.hive,
+        familyName: "");
+  }
 }

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/models/const/arbre_const.dart';
+import 'package:mpp/models/const/aromat_const.dart';
 import 'package:mpp/models/const/const_element.dart';
+import 'package:mpp/models/const/legume_const.dart';
+import 'package:mpp/models/enums/hive_exposition.dart';
+import 'package:mpp/models/info/sickness.dart';
 import 'package:mpp/models/pot.dart';
 import 'package:mpp/models/semis.dart';
 import 'package:mpp/models/terrain.dart';
@@ -19,6 +24,11 @@ void main() async {
     ..registerAdapter(TerrainAdapter())
     ..registerAdapter(SemisAdapter())
     ..registerAdapter(PotAdapter())
+    ..registerAdapter(SicknessAdapter())
+    ..registerAdapter(HiveExpositionAdapter())
+    ..registerAdapter(ArbreConstAdapter())
+    ..registerAdapter(LegumeConstAdapter())
+    ..registerAdapter(AromatConstAdapter())
     ..registerAdapter(TokenAdapter());
   await Hive.openBox<User>("user");
   await Hive.openBox<ConstElement>("const_element");

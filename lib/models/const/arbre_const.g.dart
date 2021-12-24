@@ -170,6 +170,6 @@ K _$enumDecode<K, V>(
 
 const _$HiveExpositionEnumMap = {
   HiveExposition.soleil: 'soleil',
-  HiveExposition.mi_ombre: 'mi_ombre',
+  HiveExposition.miOmbre: 'miOmbre',
   HiveExposition.ombre: 'ombre',
 };
