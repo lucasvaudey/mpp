@@ -7,7 +7,7 @@ import 'package:mpp/models/info/variety.dart';
 
 part 'aromat_const.g.dart';
 
-@HiveType(typeId: 6)
+@HiveType(typeId: 11)
 @JsonSerializable()
 class AromatConst extends ConstElement {
   @HiveField(14)

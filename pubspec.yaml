@@ -35,7 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   artemis: ^7.1.1-beta.1
   json_annotation: ^4.1.0
-  gql: 0.13.0
+  gql: ^0.13.0
   meta: ^1.7.0
   equatable: ^2.0.3
   gql_dio_link: ^0.1.0

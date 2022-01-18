@@ -8,7 +8,7 @@ part of 'aromat_const.dart';
 
 class AromatConstAdapter extends TypeAdapter<AromatConst> {
   @override
-  final int typeId = 6;
+  final int typeId = 11;
 
   @override
   AromatConst read(BinaryReader reader) {

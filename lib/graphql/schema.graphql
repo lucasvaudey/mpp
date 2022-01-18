@@ -17,7 +17,7 @@ type LegumeConst implements ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  expostion: exposition!
+  exposition: exposition!
 
   """
   Give an array of months
@@ -48,7 +48,7 @@ type LegumeConst implements ConstElement {
   Description of the culture & entretien needed
   """
   recolteDesc: String!
-  friends: [LegumeConst!]!
+  friends: [LegumeConst!]
 }
 
 interface ConstElement {
@@ -70,7 +70,7 @@ interface ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  expostion: exposition!
+  exposition: exposition!
 
   """
   Give an array of months
@@ -136,7 +136,7 @@ type ArbreConst implements ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  expostion: exposition!
+  exposition: exposition!
 
   """
   Give an array of months
@@ -203,7 +203,7 @@ type AromatConst implements ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  expostion: exposition!
+  exposition: exposition!
 
   """
   Give an array of months
@@ -383,7 +383,7 @@ input LegumeConstInput {
   recolteMonth: [Int!]!
   semisMonth: [Int!]!
   soilDesc: String!
-  expostion: exposition!
+  exposition: exposition!
 }
 
 input ArbreConstInput {
@@ -424,7 +424,7 @@ input ArbreConstInput {
   Conseils sur les légumes
   """
   advices: [String!]
-  expostion: exposition!
+  exposition: exposition!
 
   """
   Give an array of months
@@ -459,7 +459,7 @@ input AromatConstInput {
   Conseils sur les légumes
   """
   advices: [String!]
-  expostion: exposition!
+  exposition: exposition!
 
   """
   Give an array of months

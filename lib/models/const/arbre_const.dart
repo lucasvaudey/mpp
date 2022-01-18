@@ -62,7 +62,7 @@ class ArbreConst extends ConstElement {
         description: data.description,
         image: data.image,
         label: data.label,
-        exposition: data.expostion.hive,
+        exposition: data.exposition.hive,
         familyName: "");
   }
 }

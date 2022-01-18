@@ -6,4 +6,5 @@ fragment AromatCFrag on AromatConst {
   baseWidth
   image
   description
+  exposition
 }

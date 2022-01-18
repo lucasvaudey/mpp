@@ -7,6 +7,9 @@ import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/models/token.dart';
 import 'package:mpp/models/user.dart';
+import 'package:mpp/page/admin/add_arbre_const.dart';
+import 'package:mpp/page/admin/add_aromat_const.dart';
+import 'package:mpp/page/admin/add_legume_const.dart';
 import 'package:mpp/page/admin/admin_panel.dart';
 import 'package:mpp/page/connection/connection_home.dart';
 import 'package:mpp/page/connection/register.dart';
@@ -26,6 +29,9 @@ class AppProvider extends ChangeNotifier {
 
   void addAdminRoute() {
     routes[AdminPanel.route] = (context) => const AdminPanel();
+    routes[AddArbreConst.route] = (context) => const AddArbreConst();
+    routes[AddAromatConst.route] = (context) => const AddAromatConst();
+    routes[AddLegumeConst.route] = (context) => const AddLegumeConst();
   }
 
   void addUserRoute() {

@@ -1,14 +1,7 @@
 query AllLegumes($pageNumber: Int!, $numberInPage: Int!) {
   consts(pageNumber: $pageNumber, numberInPage: $numberInPage) {
-    __typename
     ... on LegumeConst {
-      id
-      label
-      defaultBgColor
-      baseHeight
-      baseWidth
-      image
-      description
+      ...LegumeCFrag
     }
   }
 }

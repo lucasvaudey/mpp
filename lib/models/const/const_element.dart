@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/graphql/generated/graphql_api.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mpp/models/const/arbre_const.dart';
+import 'package:mpp/models/const/aromat_const.dart';
+import 'package:mpp/models/const/legume_const.dart';
 import 'package:mpp/models/enums/hive_exposition.dart';
 import 'package:mpp/models/info/sickness.dart';
 import 'package:mpp/models/info/variety.dart';
@@ -60,4 +64,45 @@ class ConstElement {
   factory ConstElement.fromJson(Map<String, dynamic> json) =>
       _$ConstElementFromJson(json);
   Map<String, dynamic> toJson() => _$ConstElementToJson(this);
+
+  factory ConstElement.fromFrag(EquatableMixin constData) {
+    if (constData is LegumeCFragMixin) {
+      var data = constData as LegumeCFragMixin;
+      return LegumeConst(
+          id: data.id,
+          baseHeight: data.baseHeight,
+          baseWidth: data.baseWidth,
+          defaultBgColor: data.defaultBgColor,
+          description: data.description,
+          image: data.image,
+          label: data.label,
+          exposition: data.exposition.hive,
+          familyName: "Salut");
+    }
+    if (constData is ArbreCFragMixin) {
+      var data = constData as ArbreCFragMixin;
+      return ArbreConst(
+          id: data.id,
+          baseHeight: data.baseHeight,
+          baseWidth: data.baseWidth,
+          defaultBgColor: data.defaultBgColor,
+          description: data.description,
+          image: data.image,
+          label: data.label,
+          exposition: data.exposition.hive,
+          familyName: "NC");
+    } else {
+      var data = constData as AromatCFragMixin;
+      return AromatConst(
+          id: data.id,
+          baseHeight: data.baseHeight,
+          baseWidth: data.baseWidth,
+          defaultBgColor: data.defaultBgColor,
+          description: data.description,
+          image: data.image,
+          label: data.label,
+          exposition: data.exposition.hive,
+          familyName: "NC");
+    }
+  }
 }

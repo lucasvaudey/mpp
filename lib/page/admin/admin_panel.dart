@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mpp/models/const/const_element.dart';
+import 'package:mpp/page/admin/add_arbre_const.dart';
+import 'package:mpp/page/admin/add_aromat_const.dart';
+import 'package:mpp/page/admin/add_legume_const.dart';
 import 'package:mpp/provider/admin_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +20,48 @@ class _AdminPanelState extends State<AdminPanel> {
     return ChangeNotifierProvider(
       create: (context) => AdminProvider(),
       child: Consumer<AdminProvider>(builder: (context, provider, child) {
-        return Container();
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Admin panel"),
+          ),
+          body: SafeArea(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AddLegumeConst.route);
+                      },
+                      child: Text("Ajouter un légume"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AddArbreConst.route);
+                      },
+                      child: Text("Ajouter un arbre"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AddAromatConst.route);
+                      },
+                      child: Text("Ajouter un aromat"),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      for (ConstElement value in provider.constants)
+                        Text(value.label),
+                      if (provider.loading) CircularProgressIndicator(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       }),
     );
   }

@@ -1,1 +1,7 @@
-#TODO
+query AllAromat($numberInPage: Int!, $pageNumber: Int!) {
+  consts(numberInPage: $numberInPage, pageNumber: $pageNumber) {
+    ... on AromatConst {
+      ...AromatCFrag
+    }
+  }
+}

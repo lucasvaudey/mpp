@@ -6,4 +6,5 @@ fragment LegumeCFrag on LegumeConst {
   baseWidth
   image
   description
+  exposition
 }
