@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mpp/models/const/const_element.dart';
 import 'package:mpp/graphql/generated/graphql_api.dart';
 import 'package:mpp/models/enums/hive_exposition.dart';
+import 'package:mpp/models/enums/month.dart';
 import 'package:mpp/models/info/sickness.dart';
 import 'package:mpp/models/info/variety.dart';
 
@@ -26,9 +27,9 @@ class ArbreConst extends ConstElement {
       List<String>? advices,
       List<Sickness>? sickness,
       List<Variety>? varieties,
-      List<int>? plantMonth,
-      List<int>? semisMonth,
-      List<int>? recolteMonth,
+      List<HiveMonth>? plantMonth,
+      List<HiveMonth>? semisMonth,
+      List<HiveMonth>? recolteMonth,
       required this.familyName})
       : super(
           id: id,

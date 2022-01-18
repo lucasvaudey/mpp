@@ -17,23 +17,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text("Home page ! Bonjour ${user.pseudo}"),
-          TextButton(
-              onPressed: () async {
-                await Hive.box<User>('user').clear();
-                Navigator.pushNamedAndRemoveUntil(
-                    context, SplashScreen.route, (route) => false);
-              },
-              child: const Text("Déconnexion")),
-          if (user.admin)
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text("Home page ! Bonjour ${user.pseudo}"),
             TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, AdminPanel.route);
+                onPressed: () async {
+                  await Hive.box<User>('user').clear();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, SplashScreen.route, (route) => false);
                 },
-                child: const Text("Go to admin page"))
-        ],
+                child: const Text("Déconnexion")),
+            if (user.admin)
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, AdminPanel.route);
+                  },
+                  child: const Text("Go to admin page"))
+          ],
+        ),
       ),
     );
   }

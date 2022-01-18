@@ -5,7 +5,6 @@ import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/models/token.dart';
 import 'package:mpp/models/user.dart';
-import 'package:mpp/page/home_page.dart';
 import 'package:mpp/page/splash_screen.dart';
 
 class RegisterProvider extends ChangeNotifier {
@@ -42,7 +41,6 @@ class RegisterProvider extends ChangeNotifier {
       Navigator.pushNamedAndRemoveUntil(
           context, SplashScreen.route, (route) => false);
     } else {
-      print(response.data.toString());
       print(response.errors.toString());
     }
   }

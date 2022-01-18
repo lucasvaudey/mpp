@@ -458,17 +458,82 @@ Map<String, dynamic> _$Register$MutationToJson(Register$Mutation instance) =>
       'register': instance.register.toJson(),
     };
 
-AllLegumes$Query$Consts$LegumeConst
-    _$AllLegumes$Query$Consts$LegumeConstFromJson(Map<String, dynamic> json) {
-  return AllLegumes$Query$Consts$LegumeConst()
-    ..$$typename = json['__typename'] as String?
+AllAromat$Query$Consts$AromatConst _$AllAromat$Query$Consts$AromatConstFromJson(
+    Map<String, dynamic> json) {
+  return AllAromat$Query$Consts$AromatConst()
     ..id = fromGraphQLIdToDartint(json['id'] as String)
     ..label = json['label'] as String
     ..defaultBgColor = json['defaultBgColor'] as String
     ..baseHeight = (json['baseHeight'] as num).toDouble()
     ..baseWidth = (json['baseWidth'] as num).toDouble()
     ..image = json['image'] as String
-    ..description = json['description'] as String;
+    ..description = json['description'] as String
+    ..exposition = _$enumDecode(_$ExpositionEnumMap, json['exposition'],
+        unknownValue: Exposition.artemisUnknown);
+}
+
+Map<String, dynamic> _$AllAromat$Query$Consts$AromatConstToJson(
+    AllAromat$Query$Consts$AromatConst instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  val['label'] = instance.label;
+  val['defaultBgColor'] = instance.defaultBgColor;
+  val['baseHeight'] = instance.baseHeight;
+  val['baseWidth'] = instance.baseWidth;
+  val['image'] = instance.image;
+  val['description'] = instance.description;
+  val['exposition'] = _$ExpositionEnumMap[instance.exposition];
+  return val;
+}
+
+AllAromat$Query$Consts _$AllAromat$Query$ConstsFromJson(
+    Map<String, dynamic> json) {
+  return AllAromat$Query$Consts();
+}
+
+Map<String, dynamic> _$AllAromat$Query$ConstsToJson(
+        AllAromat$Query$Consts instance) =>
+    <String, dynamic>{};
+
+AllAromat$Query _$AllAromat$QueryFromJson(Map<String, dynamic> json) {
+  return AllAromat$Query()
+    ..consts = (json['consts'] as List<dynamic>?)
+        ?.map((e) => AllAromat$Query$Consts.fromJson(e as Map<String, dynamic>))
+        .toList();
+}
+
+Map<String, dynamic> _$AllAromat$QueryToJson(AllAromat$Query instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('consts', instance.consts?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+AllLegumes$Query$Consts$LegumeConst
+    _$AllLegumes$Query$Consts$LegumeConstFromJson(Map<String, dynamic> json) {
+  return AllLegumes$Query$Consts$LegumeConst()
+    ..id = fromGraphQLIdToDartint(json['id'] as String)
+    ..label = json['label'] as String
+    ..defaultBgColor = json['defaultBgColor'] as String
+    ..baseHeight = (json['baseHeight'] as num).toDouble()
+    ..baseWidth = (json['baseWidth'] as num).toDouble()
+    ..image = json['image'] as String
+    ..description = json['description'] as String
+    ..exposition = _$enumDecode(_$ExpositionEnumMap, json['exposition'],
+        unknownValue: Exposition.artemisUnknown);
 }
 
 Map<String, dynamic> _$AllLegumes$Query$Consts$LegumeConstToJson(
@@ -481,7 +546,6 @@ Map<String, dynamic> _$AllLegumes$Query$Consts$LegumeConstToJson(
     }
   }
 
-  writeNotNull('__typename', instance.$$typename);
   writeNotNull('id', fromDartintToGraphQLId(instance.id));
   val['label'] = instance.label;
   val['defaultBgColor'] = instance.defaultBgColor;
@@ -489,27 +553,18 @@ Map<String, dynamic> _$AllLegumes$Query$Consts$LegumeConstToJson(
   val['baseWidth'] = instance.baseWidth;
   val['image'] = instance.image;
   val['description'] = instance.description;
+  val['exposition'] = _$ExpositionEnumMap[instance.exposition];
   return val;
 }
 
 AllLegumes$Query$Consts _$AllLegumes$Query$ConstsFromJson(
     Map<String, dynamic> json) {
-  return AllLegumes$Query$Consts()..$$typename = json['__typename'] as String?;
+  return AllLegumes$Query$Consts();
 }
 
 Map<String, dynamic> _$AllLegumes$Query$ConstsToJson(
-    AllLegumes$Query$Consts instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('__typename', instance.$$typename);
-  return val;
-}
+        AllLegumes$Query$Consts instance) =>
+    <String, dynamic>{};
 
 AllLegumes$Query _$AllLegumes$QueryFromJson(Map<String, dynamic> json) {
   return AllLegumes$Query()
@@ -532,21 +587,51 @@ Map<String, dynamic> _$AllLegumes$QueryToJson(AllLegumes$Query instance) {
   return val;
 }
 
-Kw$Const$Query$Kw$const$LegumeConst
-    _$Kw$Const$Query$Kw$const$LegumeConstFromJson(Map<String, dynamic> json) {
-  return Kw$Const$Query$Kw$const$LegumeConst()
-    ..$$typename = json['__typename'] as String?
+AllArbres$Query$Consts$ArbreConst _$AllArbres$Query$Consts$ArbreConstFromJson(
+    Map<String, dynamic> json) {
+  return AllArbres$Query$Consts$ArbreConst()
+    ..id = fromGraphQLIdToDartint(json['id'] as String)
+    ..baseHeight = (json['baseHeight'] as num).toDouble()
+    ..label = json['label'] as String
+    ..defaultBgColor = json['defaultBgColor'] as String
+    ..baseWidth = (json['baseWidth'] as num).toDouble()
     ..description = json['description'] as String
-    ..label = json['label'] as String
-    ..defaultBgColor = json['defaultBgColor'] as String
-    ..baseHeight = (json['baseHeight'] as num).toDouble()
-    ..baseWidth = (json['baseWidth'] as num).toDouble()
     ..image = json['image'] as String
-    ..id = fromGraphQLIdToDartint(json['id'] as String);
+    ..advices =
+        (json['advices'] as List<dynamic>?)?.map((e) => e as String).toList()
+    ..exposition = _$enumDecode(_$ExpositionEnumMap, json['exposition'],
+        unknownValue: Exposition.artemisUnknown)
+    ..plantMonth = (json['plantMonth'] as List<dynamic>?)
+        ?.map((e) =>
+            _$enumDecode(_$MonthEnumMap, e, unknownValue: Month.artemisUnknown))
+        .toList()
+    ..recolteMonth = (json['recolteMonth'] as List<dynamic>?)
+        ?.map((e) =>
+            _$enumDecode(_$MonthEnumMap, e, unknownValue: Month.artemisUnknown))
+        .toList()
+    ..semisMonth = (json['semisMonth'] as List<dynamic>?)
+        ?.map((e) =>
+            _$enumDecode(_$MonthEnumMap, e, unknownValue: Month.artemisUnknown))
+        .toList()
+    ..climatDesc = json['climatDesc'] as String
+    ..tailleDesc = json['tailleDesc'] as String
+    ..recolteDesc = json['recolteDesc'] as String
+    ..tailleMonth =
+        (json['tailleMonth'] as List<dynamic>).map((e) => e as int).toList()
+    ..rusticity = _$enumDecode(_$RusticityEnumMap, json['rusticity'],
+        unknownValue: Rusticity.artemisUnknown)
+    ..varieties = (json['varieties'] as List<dynamic>?)
+        ?.map((e) =>
+            ArbreCFragMixin$Varieties.fromJson(e as Map<String, dynamic>))
+        .toList()
+    ..sickness = (json['sickness'] as List<dynamic>?)
+        ?.map(
+            (e) => ArbreCFragMixin$Sickness.fromJson(e as Map<String, dynamic>))
+        .toList();
 }
 
-Map<String, dynamic> _$Kw$Const$Query$Kw$const$LegumeConstToJson(
-    Kw$Const$Query$Kw$const$LegumeConst instance) {
+Map<String, dynamic> _$AllArbres$Query$Consts$ArbreConstToJson(
+    AllArbres$Query$Consts$ArbreConst instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -555,32 +640,111 @@ Map<String, dynamic> _$Kw$Const$Query$Kw$const$LegumeConstToJson(
     }
   }
 
-  writeNotNull('__typename', instance.$$typename);
-  val['description'] = instance.description;
+  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  val['baseHeight'] = instance.baseHeight;
   val['label'] = instance.label;
   val['defaultBgColor'] = instance.defaultBgColor;
-  val['baseHeight'] = instance.baseHeight;
   val['baseWidth'] = instance.baseWidth;
+  val['description'] = instance.description;
   val['image'] = instance.image;
-  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  writeNotNull('advices', instance.advices);
+  val['exposition'] = _$ExpositionEnumMap[instance.exposition];
+  writeNotNull('plantMonth',
+      instance.plantMonth?.map((e) => _$MonthEnumMap[e]).toList());
+  writeNotNull('recolteMonth',
+      instance.recolteMonth?.map((e) => _$MonthEnumMap[e]).toList());
+  writeNotNull('semisMonth',
+      instance.semisMonth?.map((e) => _$MonthEnumMap[e]).toList());
+  val['climatDesc'] = instance.climatDesc;
+  val['tailleDesc'] = instance.tailleDesc;
+  val['recolteDesc'] = instance.recolteDesc;
+  val['tailleMonth'] = instance.tailleMonth;
+  val['rusticity'] = _$RusticityEnumMap[instance.rusticity];
+  writeNotNull(
+      'varieties', instance.varieties?.map((e) => e.toJson()).toList());
+  writeNotNull('sickness', instance.sickness?.map((e) => e.toJson()).toList());
   return val;
 }
 
-Kw$Const$Query$Kw$const$ArbreConst _$Kw$Const$Query$Kw$const$ArbreConstFromJson(
+const _$MonthEnumMap = {
+  Month.janvier: 'JANVIER',
+  Month.fevrier: 'FEVRIER',
+  Month.mars: 'MARS',
+  Month.avril: 'AVRIL',
+  Month.mai: 'MAI',
+  Month.juin: 'JUIN',
+  Month.juillet: 'JUILLET',
+  Month.aout: 'AOUT',
+  Month.septembre: 'SEPTEMBRE',
+  Month.octobre: 'OCTOBRE',
+  Month.novembre: 'NOVEMBRE',
+  Month.decembre: 'DECEMBRE',
+  Month.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+AllArbres$Query$Consts _$AllArbres$Query$ConstsFromJson(
     Map<String, dynamic> json) {
-  return Kw$Const$Query$Kw$const$ArbreConst()
-    ..$$typename = json['__typename'] as String?
+  return AllArbres$Query$Consts();
+}
+
+Map<String, dynamic> _$AllArbres$Query$ConstsToJson(
+        AllArbres$Query$Consts instance) =>
+    <String, dynamic>{};
+
+AllArbres$Query _$AllArbres$QueryFromJson(Map<String, dynamic> json) {
+  return AllArbres$Query()
+    ..consts = (json['consts'] as List<dynamic>?)
+        ?.map((e) => AllArbres$Query$Consts.fromJson(e as Map<String, dynamic>))
+        .toList();
+}
+
+Map<String, dynamic> _$AllArbres$QueryToJson(AllArbres$Query instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('consts', instance.consts?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+ArbreCFragMixin$Varieties _$ArbreCFragMixin$VarietiesFromJson(
+    Map<String, dynamic> json) {
+  return ArbreCFragMixin$Varieties()
+    ..id = fromGraphQLIdToDartint(json['id'] as String)
+    ..image = json['image'] as String
+    ..label = json['label'] as String;
+}
+
+Map<String, dynamic> _$ArbreCFragMixin$VarietiesToJson(
+    ArbreCFragMixin$Varieties instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  val['image'] = instance.image;
+  val['label'] = instance.label;
+  return val;
+}
+
+ArbreCFragMixin$Sickness _$ArbreCFragMixin$SicknessFromJson(
+    Map<String, dynamic> json) {
+  return ArbreCFragMixin$Sickness()
     ..id = fromGraphQLIdToDartint(json['id'] as String)
     ..label = json['label'] as String
-    ..defaultBgColor = json['defaultBgColor'] as String
-    ..baseHeight = (json['baseHeight'] as num).toDouble()
-    ..baseWidth = (json['baseWidth'] as num).toDouble()
-    ..image = json['image'] as String
     ..description = json['description'] as String;
 }
 
-Map<String, dynamic> _$Kw$Const$Query$Kw$const$ArbreConstToJson(
-    Kw$Const$Query$Kw$const$ArbreConst instance) {
+Map<String, dynamic> _$ArbreCFragMixin$SicknessToJson(
+    ArbreCFragMixin$Sickness instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -589,88 +753,9 @@ Map<String, dynamic> _$Kw$Const$Query$Kw$const$ArbreConstToJson(
     }
   }
 
-  writeNotNull('__typename', instance.$$typename);
   writeNotNull('id', fromDartintToGraphQLId(instance.id));
   val['label'] = instance.label;
-  val['defaultBgColor'] = instance.defaultBgColor;
-  val['baseHeight'] = instance.baseHeight;
-  val['baseWidth'] = instance.baseWidth;
-  val['image'] = instance.image;
   val['description'] = instance.description;
-  return val;
-}
-
-Kw$Const$Query$Kw$const$AromatConst
-    _$Kw$Const$Query$Kw$const$AromatConstFromJson(Map<String, dynamic> json) {
-  return Kw$Const$Query$Kw$const$AromatConst()
-    ..$$typename = json['__typename'] as String?
-    ..label = json['label'] as String
-    ..id = fromGraphQLIdToDartint(json['id'] as String)
-    ..defaultBgColor = json['defaultBgColor'] as String
-    ..baseHeight = (json['baseHeight'] as num).toDouble()
-    ..baseWidth = (json['baseWidth'] as num).toDouble()
-    ..image = json['image'] as String
-    ..description = json['description'] as String;
-}
-
-Map<String, dynamic> _$Kw$Const$Query$Kw$const$AromatConstToJson(
-    Kw$Const$Query$Kw$const$AromatConst instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('__typename', instance.$$typename);
-  val['label'] = instance.label;
-  writeNotNull('id', fromDartintToGraphQLId(instance.id));
-  val['defaultBgColor'] = instance.defaultBgColor;
-  val['baseHeight'] = instance.baseHeight;
-  val['baseWidth'] = instance.baseWidth;
-  val['image'] = instance.image;
-  val['description'] = instance.description;
-  return val;
-}
-
-Kw$Const$Query$Kw$const _$Kw$Const$Query$Kw$constFromJson(
-    Map<String, dynamic> json) {
-  return Kw$Const$Query$Kw$const()..$$typename = json['__typename'] as String?;
-}
-
-Map<String, dynamic> _$Kw$Const$Query$Kw$constToJson(
-    Kw$Const$Query$Kw$const instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('__typename', instance.$$typename);
-  return val;
-}
-
-Kw$Const$Query _$Kw$Const$QueryFromJson(Map<String, dynamic> json) {
-  return Kw$Const$Query()
-    ..kw$const = json['const'] == null
-        ? null
-        : Kw$Const$Query$Kw$const.fromJson(
-            json['const'] as Map<String, dynamic>);
-}
-
-Map<String, dynamic> _$Kw$Const$QueryToJson(Kw$Const$Query instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('const', instance.kw$const?.toJson());
   return val;
 }
 
@@ -725,12 +810,18 @@ AllConsts$Query$Consts$ArbreConst _$AllConsts$Query$Consts$ArbreConstFromJson(
         (json['advices'] as List<dynamic>?)?.map((e) => e as String).toList()
     ..exposition = _$enumDecode(_$ExpositionEnumMap, json['exposition'],
         unknownValue: Exposition.artemisUnknown)
-    ..plantMonth =
-        (json['plantMonth'] as List<dynamic>?)?.map((e) => e as int).toList()
-    ..recolteMonth =
-        (json['recolteMonth'] as List<dynamic>?)?.map((e) => e as int).toList()
-    ..semisMonth =
-        (json['semisMonth'] as List<dynamic>?)?.map((e) => e as int).toList()
+    ..plantMonth = (json['plantMonth'] as List<dynamic>?)
+        ?.map((e) =>
+            _$enumDecode(_$MonthEnumMap, e, unknownValue: Month.artemisUnknown))
+        .toList()
+    ..recolteMonth = (json['recolteMonth'] as List<dynamic>?)
+        ?.map((e) =>
+            _$enumDecode(_$MonthEnumMap, e, unknownValue: Month.artemisUnknown))
+        .toList()
+    ..semisMonth = (json['semisMonth'] as List<dynamic>?)
+        ?.map((e) =>
+            _$enumDecode(_$MonthEnumMap, e, unknownValue: Month.artemisUnknown))
+        .toList()
     ..climatDesc = json['climatDesc'] as String
     ..tailleDesc = json['tailleDesc'] as String
     ..recolteDesc = json['recolteDesc'] as String
@@ -768,9 +859,12 @@ Map<String, dynamic> _$AllConsts$Query$Consts$ArbreConstToJson(
   val['image'] = instance.image;
   writeNotNull('advices', instance.advices);
   val['exposition'] = _$ExpositionEnumMap[instance.exposition];
-  writeNotNull('plantMonth', instance.plantMonth);
-  writeNotNull('recolteMonth', instance.recolteMonth);
-  writeNotNull('semisMonth', instance.semisMonth);
+  writeNotNull('plantMonth',
+      instance.plantMonth?.map((e) => _$MonthEnumMap[e]).toList());
+  writeNotNull('recolteMonth',
+      instance.recolteMonth?.map((e) => _$MonthEnumMap[e]).toList());
+  writeNotNull('semisMonth',
+      instance.semisMonth?.map((e) => _$MonthEnumMap[e]).toList());
   val['climatDesc'] = instance.climatDesc;
   val['tailleDesc'] = instance.tailleDesc;
   val['recolteDesc'] = instance.recolteDesc;
@@ -856,54 +950,6 @@ Map<String, dynamic> _$AllConsts$QueryToJson(AllConsts$Query instance) {
   }
 
   writeNotNull('consts', instance.consts?.map((e) => e.toJson()).toList());
-  return val;
-}
-
-ArbreCFragMixin$Varieties _$ArbreCFragMixin$VarietiesFromJson(
-    Map<String, dynamic> json) {
-  return ArbreCFragMixin$Varieties()
-    ..id = fromGraphQLIdToDartint(json['id'] as String)
-    ..image = json['image'] as String
-    ..label = json['label'] as String;
-}
-
-Map<String, dynamic> _$ArbreCFragMixin$VarietiesToJson(
-    ArbreCFragMixin$Varieties instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', fromDartintToGraphQLId(instance.id));
-  val['image'] = instance.image;
-  val['label'] = instance.label;
-  return val;
-}
-
-ArbreCFragMixin$Sickness _$ArbreCFragMixin$SicknessFromJson(
-    Map<String, dynamic> json) {
-  return ArbreCFragMixin$Sickness()
-    ..id = fromGraphQLIdToDartint(json['id'] as String)
-    ..label = json['label'] as String
-    ..description = json['description'] as String;
-}
-
-Map<String, dynamic> _$ArbreCFragMixin$SicknessToJson(
-    ArbreCFragMixin$Sickness instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('id', fromDartintToGraphQLId(instance.id));
-  val['label'] = instance.label;
-  val['description'] = instance.description;
   return val;
 }
 
@@ -1167,6 +1213,148 @@ Map<String, dynamic> _$Me$QueryToJson(Me$Query instance) => <String, dynamic>{
       'me': instance.me.toJson(),
     };
 
+Kw$Const$Query$Kw$const$LegumeConst
+    _$Kw$Const$Query$Kw$const$LegumeConstFromJson(Map<String, dynamic> json) {
+  return Kw$Const$Query$Kw$const$LegumeConst()
+    ..$$typename = json['__typename'] as String?
+    ..description = json['description'] as String
+    ..label = json['label'] as String
+    ..defaultBgColor = json['defaultBgColor'] as String
+    ..baseHeight = (json['baseHeight'] as num).toDouble()
+    ..baseWidth = (json['baseWidth'] as num).toDouble()
+    ..image = json['image'] as String
+    ..id = fromGraphQLIdToDartint(json['id'] as String);
+}
+
+Map<String, dynamic> _$Kw$Const$Query$Kw$const$LegumeConstToJson(
+    Kw$Const$Query$Kw$const$LegumeConst instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('__typename', instance.$$typename);
+  val['description'] = instance.description;
+  val['label'] = instance.label;
+  val['defaultBgColor'] = instance.defaultBgColor;
+  val['baseHeight'] = instance.baseHeight;
+  val['baseWidth'] = instance.baseWidth;
+  val['image'] = instance.image;
+  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  return val;
+}
+
+Kw$Const$Query$Kw$const$ArbreConst _$Kw$Const$Query$Kw$const$ArbreConstFromJson(
+    Map<String, dynamic> json) {
+  return Kw$Const$Query$Kw$const$ArbreConst()
+    ..$$typename = json['__typename'] as String?
+    ..id = fromGraphQLIdToDartint(json['id'] as String)
+    ..label = json['label'] as String
+    ..defaultBgColor = json['defaultBgColor'] as String
+    ..baseHeight = (json['baseHeight'] as num).toDouble()
+    ..baseWidth = (json['baseWidth'] as num).toDouble()
+    ..image = json['image'] as String
+    ..description = json['description'] as String;
+}
+
+Map<String, dynamic> _$Kw$Const$Query$Kw$const$ArbreConstToJson(
+    Kw$Const$Query$Kw$const$ArbreConst instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('__typename', instance.$$typename);
+  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  val['label'] = instance.label;
+  val['defaultBgColor'] = instance.defaultBgColor;
+  val['baseHeight'] = instance.baseHeight;
+  val['baseWidth'] = instance.baseWidth;
+  val['image'] = instance.image;
+  val['description'] = instance.description;
+  return val;
+}
+
+Kw$Const$Query$Kw$const$AromatConst
+    _$Kw$Const$Query$Kw$const$AromatConstFromJson(Map<String, dynamic> json) {
+  return Kw$Const$Query$Kw$const$AromatConst()
+    ..$$typename = json['__typename'] as String?
+    ..label = json['label'] as String
+    ..id = fromGraphQLIdToDartint(json['id'] as String)
+    ..defaultBgColor = json['defaultBgColor'] as String
+    ..baseHeight = (json['baseHeight'] as num).toDouble()
+    ..baseWidth = (json['baseWidth'] as num).toDouble()
+    ..image = json['image'] as String
+    ..description = json['description'] as String;
+}
+
+Map<String, dynamic> _$Kw$Const$Query$Kw$const$AromatConstToJson(
+    Kw$Const$Query$Kw$const$AromatConst instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('__typename', instance.$$typename);
+  val['label'] = instance.label;
+  writeNotNull('id', fromDartintToGraphQLId(instance.id));
+  val['defaultBgColor'] = instance.defaultBgColor;
+  val['baseHeight'] = instance.baseHeight;
+  val['baseWidth'] = instance.baseWidth;
+  val['image'] = instance.image;
+  val['description'] = instance.description;
+  return val;
+}
+
+Kw$Const$Query$Kw$const _$Kw$Const$Query$Kw$constFromJson(
+    Map<String, dynamic> json) {
+  return Kw$Const$Query$Kw$const()..$$typename = json['__typename'] as String?;
+}
+
+Map<String, dynamic> _$Kw$Const$Query$Kw$constToJson(
+    Kw$Const$Query$Kw$const instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('__typename', instance.$$typename);
+  return val;
+}
+
+Kw$Const$Query _$Kw$Const$QueryFromJson(Map<String, dynamic> json) {
+  return Kw$Const$Query()
+    ..kw$const = json['const'] == null
+        ? null
+        : Kw$Const$Query$Kw$const.fromJson(
+            json['const'] as Map<String, dynamic>);
+}
+
+Map<String, dynamic> _$Kw$Const$QueryToJson(Kw$Const$Query instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('const', instance.kw$const?.toJson());
+  return val;
+}
+
 RemoveConstArguments _$RemoveConstArgumentsFromJson(Map<String, dynamic> json) {
   return RemoveConstArguments(
     id: json['id'] as int,
@@ -1219,6 +1407,19 @@ Map<String, dynamic> _$RegisterArgumentsToJson(RegisterArguments instance) =>
       'email': instance.email,
     };
 
+AllAromatArguments _$AllAromatArgumentsFromJson(Map<String, dynamic> json) {
+  return AllAromatArguments(
+    numberInPage: json['numberInPage'] as int,
+    pageNumber: json['pageNumber'] as int,
+  );
+}
+
+Map<String, dynamic> _$AllAromatArgumentsToJson(AllAromatArguments instance) =>
+    <String, dynamic>{
+      'numberInPage': instance.numberInPage,
+      'pageNumber': instance.pageNumber,
+    };
+
 AllLegumesArguments _$AllLegumesArgumentsFromJson(Map<String, dynamic> json) {
   return AllLegumesArguments(
     pageNumber: json['pageNumber'] as int,
@@ -1233,15 +1434,17 @@ Map<String, dynamic> _$AllLegumesArgumentsToJson(
       'numberInPage': instance.numberInPage,
     };
 
-Kw$ConstArguments _$Kw$ConstArgumentsFromJson(Map<String, dynamic> json) {
-  return Kw$ConstArguments(
-    constId: json['constId'] as int,
+AllArbresArguments _$AllArbresArgumentsFromJson(Map<String, dynamic> json) {
+  return AllArbresArguments(
+    numberInPage: json['numberInPage'] as int,
+    pageNumber: json['pageNumber'] as int,
   );
 }
 
-Map<String, dynamic> _$Kw$ConstArgumentsToJson(Kw$ConstArguments instance) =>
+Map<String, dynamic> _$AllArbresArgumentsToJson(AllArbresArguments instance) =>
     <String, dynamic>{
-      'constId': instance.constId,
+      'numberInPage': instance.numberInPage,
+      'pageNumber': instance.pageNumber,
     };
 
 AllConstsArguments _$AllConstsArgumentsFromJson(Map<String, dynamic> json) {
@@ -1255,4 +1458,15 @@ Map<String, dynamic> _$AllConstsArgumentsToJson(AllConstsArguments instance) =>
     <String, dynamic>{
       'pageNumber': instance.pageNumber,
       'numberInPage': instance.numberInPage,
+    };
+
+Kw$ConstArguments _$Kw$ConstArgumentsFromJson(Map<String, dynamic> json) {
+  return Kw$ConstArguments(
+    constId: json['constId'] as int,
+  );
+}
+
+Map<String, dynamic> _$Kw$ConstArgumentsToJson(Kw$ConstArguments instance) =>
+    <String, dynamic>{
+      'constId': instance.constId,
     };

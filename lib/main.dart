@@ -6,6 +6,7 @@ import 'package:mpp/models/const/aromat_const.dart';
 import 'package:mpp/models/const/const_element.dart';
 import 'package:mpp/models/const/legume_const.dart';
 import 'package:mpp/models/enums/hive_exposition.dart';
+import 'package:mpp/models/enums/month.dart';
 import 'package:mpp/models/info/sickness.dart';
 import 'package:mpp/models/pot.dart';
 import 'package:mpp/models/semis.dart';
@@ -29,6 +30,7 @@ void main() async {
     ..registerAdapter(ArbreConstAdapter())
     ..registerAdapter(LegumeConstAdapter())
     ..registerAdapter(AromatConstAdapter())
+    ..registerAdapter(HiveMonthAdapter())
     ..registerAdapter(TokenAdapter());
   await Hive.openBox<User>("user");
   await Hive.openBox<ConstElement>("const_element");

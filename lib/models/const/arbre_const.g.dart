@@ -28,9 +28,9 @@ class ArbreConstAdapter extends TypeAdapter<ArbreConst> {
       advices: (fields[7] as List?)?.cast<String>(),
       sickness: (fields[8] as List?)?.cast<Sickness>(),
       varieties: (fields[9] as List?)?.cast<Variety>(),
-      plantMonth: (fields[11] as List?)?.cast<int>(),
-      semisMonth: (fields[12] as List?)?.cast<int>(),
-      recolteMonth: (fields[13] as List?)?.cast<int>(),
+      plantMonth: (fields[11] as List?)?.cast<HiveMonth>(),
+      semisMonth: (fields[12] as List?)?.cast<HiveMonth>(),
+      recolteMonth: (fields[13] as List?)?.cast<HiveMonth>(),
       familyName: fields[14] as String,
     );
   }
@@ -104,12 +104,15 @@ ArbreConst _$ArbreConstFromJson(Map<String, dynamic> json) {
     varieties: (json['varieties'] as List<dynamic>?)
         ?.map((e) => Variety.fromJson(e as Map<String, dynamic>))
         .toList(),
-    plantMonth:
-        (json['plantMonth'] as List<dynamic>?)?.map((e) => e as int).toList(),
-    semisMonth:
-        (json['semisMonth'] as List<dynamic>?)?.map((e) => e as int).toList(),
-    recolteMonth:
-        (json['recolteMonth'] as List<dynamic>?)?.map((e) => e as int).toList(),
+    plantMonth: (json['plantMonth'] as List<dynamic>?)
+        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
+        .toList(),
+    semisMonth: (json['semisMonth'] as List<dynamic>?)
+        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
+        .toList(),
+    recolteMonth: (json['recolteMonth'] as List<dynamic>?)
+        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
+        .toList(),
     familyName: json['familyName'] as String,
   );
 }
@@ -135,9 +138,12 @@ Map<String, dynamic> _$ArbreConstToJson(ArbreConst instance) {
   writeNotNull('sickness', instance.sickness);
   writeNotNull('varieties', instance.varieties);
   val['exposition'] = _$HiveExpositionEnumMap[instance.exposition];
-  writeNotNull('plantMonth', instance.plantMonth);
-  writeNotNull('semisMonth', instance.semisMonth);
-  writeNotNull('recolteMonth', instance.recolteMonth);
+  writeNotNull('plantMonth',
+      instance.plantMonth?.map((e) => _$HiveMonthEnumMap[e]).toList());
+  writeNotNull('semisMonth',
+      instance.semisMonth?.map((e) => _$HiveMonthEnumMap[e]).toList());
+  writeNotNull('recolteMonth',
+      instance.recolteMonth?.map((e) => _$HiveMonthEnumMap[e]).toList());
   val['familyName'] = instance.familyName;
   return val;
 }
@@ -172,4 +178,19 @@ const _$HiveExpositionEnumMap = {
   HiveExposition.soleil: 'soleil',
   HiveExposition.miOmbre: 'miOmbre',
   HiveExposition.ombre: 'ombre',
+};
+
+const _$HiveMonthEnumMap = {
+  HiveMonth.janvier: 'janvier',
+  HiveMonth.fevrier: 'fevrier',
+  HiveMonth.mars: 'mars',
+  HiveMonth.avril: 'avril',
+  HiveMonth.mai: 'mai',
+  HiveMonth.juin: 'juin',
+  HiveMonth.juillet: 'juillet',
+  HiveMonth.aout: 'aout',
+  HiveMonth.septembre: 'septembre',
+  HiveMonth.octobre: 'octobre',
+  HiveMonth.novembre: 'novembre',
+  HiveMonth.decembre: 'decembre',
 };

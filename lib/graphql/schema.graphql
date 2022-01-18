@@ -22,17 +22,17 @@ type LegumeConst implements ConstElement {
   """
   Give an array of months
   """
-  plantMonth: [Int!]
+  plantMonth: [month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [Int!]
+  recolteMonth: [month!]
 
   """
   Give an array of months
   """
-  semisMonth: [Int!]
+  semisMonth: [month!]
 
   """
   Description of the soil needed
@@ -75,17 +75,17 @@ interface ConstElement {
   """
   Give an array of months
   """
-  plantMonth: [Int!]
+  plantMonth: [month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [Int!]
+  recolteMonth: [month!]
 
   """
   Give an array of months
   """
-  semisMonth: [Int!]
+  semisMonth: [month!]
 }
 
 """
@@ -117,6 +117,24 @@ enum exposition {
   MI_OMBRE
 }
 
+"""
+Months of the year
+"""
+enum month {
+  JANVIER
+  FEVRIER
+  MARS
+  AVRIL
+  MAI
+  JUIN
+  JUILLET
+  AOUT
+  SEPTEMBRE
+  OCTOBRE
+  NOVEMBRE
+  DECEMBRE
+}
+
 type ArbreConst implements ConstElement {
   id: ID!
   label: String!
@@ -141,17 +159,17 @@ type ArbreConst implements ConstElement {
   """
   Give an array of months
   """
-  plantMonth: [Int!]
+  plantMonth: [month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [Int!]
+  recolteMonth: [month!]
 
   """
   Give an array of months
   """
-  semisMonth: [Int!]
+  semisMonth: [month!]
 
   """
   Description of the climat needed
@@ -208,17 +226,17 @@ type AromatConst implements ConstElement {
   """
   Give an array of months
   """
-  plantMonth: [Int!]
+  plantMonth: [month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [Int!]
+  recolteMonth: [month!]
 
   """
   Give an array of months
   """
-  semisMonth: [Int!]
+  semisMonth: [month!]
 
   """
   Description of the soil needed
@@ -247,6 +265,7 @@ type User {
   terrains: [Terrain!]
   semis: [Semis!]
   pot: [Pot!]
+  posts: [Post!]
 }
 
 """
@@ -312,6 +331,14 @@ type SemiElement {
 type Pot {
   id: Int!
   name: String!
+  user: User!
+}
+
+type Post {
+  id: Int!
+  title: String!
+  content: String!
+  url: URL
   user: User!
 }
 

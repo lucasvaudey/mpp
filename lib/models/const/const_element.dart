@@ -6,6 +6,7 @@ import 'package:mpp/models/const/arbre_const.dart';
 import 'package:mpp/models/const/aromat_const.dart';
 import 'package:mpp/models/const/legume_const.dart';
 import 'package:mpp/models/enums/hive_exposition.dart';
+import 'package:mpp/models/enums/month.dart';
 import 'package:mpp/models/info/sickness.dart';
 import 'package:mpp/models/info/variety.dart';
 
@@ -38,11 +39,11 @@ class ConstElement {
   @HiveField(10)
   HiveExposition exposition;
   @HiveField(11)
-  List<int>? plantMonth;
+  List<HiveMonth>? plantMonth;
   @HiveField(12)
-  List<int>? semisMonth;
+  List<HiveMonth>? semisMonth;
   @HiveField(13)
-  List<int>? recolteMonth;
+  List<HiveMonth>? recolteMonth;
 
   ConstElement({
     required this.id,
