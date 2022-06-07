@@ -44,11 +44,9 @@ class SicknessAdapter extends TypeAdapter<Sickness> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Sickness _$SicknessFromJson(Map<String, dynamic> json) {
-  return Sickness(
-    familyName: json['familyName'] as String,
-  );
-}
+Sickness _$SicknessFromJson(Map<String, dynamic> json) => Sickness(
+      familyName: json['familyName'] as String,
+    );
 
 Map<String, dynamic> _$SicknessToJson(Sickness instance) => <String, dynamic>{
       'familyName': instance.familyName,

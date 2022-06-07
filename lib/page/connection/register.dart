@@ -42,8 +42,11 @@ class _RegisterState extends State<Register> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await provider.register(_emailController.text,
-                          _pseudoController.text, _passwordController.text);
+                      await provider.register(
+                        _emailController.text,
+                        _pseudoController.text,
+                        _passwordController.text,
+                      );
                     },
                     child: const Text("VALIDER"),
                   ),

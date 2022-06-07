@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:artemis/artemis.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/app.dart';
 import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/models/token.dart';
@@ -65,11 +66,14 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> getUserInfo(Token token) async {
-    ArtemisClient _client = getClient(token.access);
-    final response = await _client.execute(MeQuery());
-    //TODO: Refresh token here
-    if (response.data?.me.user != null) {
-      User newUser = User.fromMeQuery(response.data!.me.user!, token);
+    ArtemisClient client = getClient(token.access);
+    final response = await client.execute(MeQuery());
+    if (response.hasErrors) {
+      Navigator.of(navigatorKey.currentContext!)
+          .pushNamedAndRemoveUntil(ConnectionHome.route, (route) => false);
+    }
+    if (response.data?.me != null) {
+      User newUser = User.fromFrag(response.data!.me!, token);
       if (newUser.admin) {
         addAdminRoute();
       }
@@ -77,6 +81,9 @@ class AppProvider extends ChangeNotifier {
         addPremiumRoute();
       }
       Hive.box<User>('user').put('current', newUser);
+    } else {
+      Navigator.of(navigatorKey.currentContext!)
+          .pushNamedAndRemoveUntil(ConnectionHome.route, (route) => false);
     }
   }
 }

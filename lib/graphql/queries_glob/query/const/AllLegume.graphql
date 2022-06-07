@@ -1,5 +1,6 @@
 query AllLegumes($pageNumber: Int!, $numberInPage: Int!) {
   consts(pageNumber: $pageNumber, numberInPage: $numberInPage) {
+    __typename
     ... on LegumeConst {
       ...LegumeCFrag
     }

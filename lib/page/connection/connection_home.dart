@@ -69,7 +69,8 @@ class _ConnectionHomeState extends State<ConnectionHome> {
                   Navigator.of(context).pushNamed(Register.route);
                 },
                 child: Center(
-                    child: Text("Register", style: kConnectionButtonText)),
+                  child: Text("Register", style: kConnectionButtonText),
+                ),
               ),
             ],
           ),

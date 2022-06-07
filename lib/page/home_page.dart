@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -22,18 +22,26 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text("Home page ! Bonjour ${user.pseudo}"),
             TextButton(
-                onPressed: () async {
-                  await Hive.box<User>('user').clear();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, SplashScreen.route, (route) => false);
-                },
-                child: const Text("Déconnexion")),
+              onPressed: () async {
+                await Hive.box<User>('user').clear();
+                if (!mounted) {
+                  return;
+                }
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  SplashScreen.route,
+                  (route) => false,
+                );
+              },
+              child: const Text("Déconnexion"),
+            ),
             if (user.admin)
               TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, AdminPanel.route);
-                  },
-                  child: const Text("Go to admin page"))
+                onPressed: () {
+                  Navigator.pushNamed(context, AdminPanel.route);
+                },
+                child: const Text("Go to admin page"),
+              ),
           ],
         ),
       ),

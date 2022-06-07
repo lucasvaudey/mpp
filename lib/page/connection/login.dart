@@ -20,8 +20,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   @override
   void initState() {
     _controllerFade = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1000))
-      ..addListener(() {
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    )..addListener(() {
         setState(() {});
       });
     _fadeAnimation = Tween(begin: 0.0, end: 1.0).animate(_controllerFade);
@@ -77,8 +78,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                       fillColor: kLightPink,
                       filled: true,
-                      label: Text("Email ou pseudo :",
-                          style: TextStyle(fontSize: 20.h)),
+                      label: Text(
+                        "Email ou pseudo :",
+                        style: TextStyle(fontSize: 20.h),
+                      ),
                     ),
                   ),
                   SizedBox(

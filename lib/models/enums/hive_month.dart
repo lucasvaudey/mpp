@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mpp/graphql/generated/graphql_api.dart';
 
-part 'month.g.dart';
+part 'hive_month.g.dart';
 
 @HiveType(typeId: 12)
 enum HiveMonth {

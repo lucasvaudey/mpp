@@ -86,36 +86,34 @@ class AromatConstAdapter extends TypeAdapter<AromatConst> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-AromatConst _$AromatConstFromJson(Map<String, dynamic> json) {
-  return AromatConst(
-    id: json['id'] as int,
-    baseHeight: (json['baseHeight'] as num).toDouble(),
-    baseWidth: (json['baseWidth'] as num).toDouble(),
-    defaultBgColor: json['defaultBgColor'] as String,
-    description: json['description'] as String,
-    image: json['image'] as String,
-    label: json['label'] as String,
-    exposition: _$enumDecode(_$HiveExpositionEnumMap, json['exposition']),
-    advices:
-        (json['advices'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    sickness: (json['sickness'] as List<dynamic>?)
-        ?.map((e) => Sickness.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    varieties: (json['varieties'] as List<dynamic>?)
-        ?.map((e) => Variety.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    plantMonth: (json['plantMonth'] as List<dynamic>?)
-        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
-        .toList(),
-    semisMonth: (json['semisMonth'] as List<dynamic>?)
-        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
-        .toList(),
-    recolteMonth: (json['recolteMonth'] as List<dynamic>?)
-        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
-        .toList(),
-    familyName: json['familyName'] as String,
-  );
-}
+AromatConst _$AromatConstFromJson(Map<String, dynamic> json) => AromatConst(
+      id: json['id'] as int,
+      baseHeight: (json['baseHeight'] as num).toDouble(),
+      baseWidth: (json['baseWidth'] as num).toDouble(),
+      defaultBgColor: json['defaultBgColor'] as String,
+      description: json['description'] as String,
+      image: json['image'] as String,
+      label: json['label'] as String,
+      exposition: $enumDecode(_$HiveExpositionEnumMap, json['exposition']),
+      advices:
+          (json['advices'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      sickness: (json['sickness'] as List<dynamic>?)
+          ?.map((e) => Sickness.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      varieties: (json['varieties'] as List<dynamic>?)
+          ?.map((e) => Variety.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      plantMonth: (json['plantMonth'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$HiveMonthEnumMap, e))
+          .toList(),
+      semisMonth: (json['semisMonth'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$HiveMonthEnumMap, e))
+          .toList(),
+      recolteMonth: (json['recolteMonth'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$HiveMonthEnumMap, e))
+          .toList(),
+      familyName: json['familyName'] as String,
+    );
 
 Map<String, dynamic> _$AromatConstToJson(AromatConst instance) {
   final val = <String, dynamic>{
@@ -146,32 +144,6 @@ Map<String, dynamic> _$AromatConstToJson(AromatConst instance) {
       instance.recolteMonth?.map((e) => _$HiveMonthEnumMap[e]).toList());
   val['familyName'] = instance.familyName;
   return val;
-}
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
 }
 
 const _$HiveExpositionEnumMap = {

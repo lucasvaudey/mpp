@@ -1,5 +1,6 @@
 query AllArbres($numberInPage: Int!, $pageNumber: Int!) {
   consts(numberInPage: $numberInPage, pageNumber: $pageNumber) {
+    __typename
     ... on ArbreConst {
       ...ArbreCFrag
     }

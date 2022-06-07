@@ -27,6 +27,8 @@ targets:
               dart_type: String
             - graphql_type: Longitude
               dart_type: double
+            - graphql_type: ColorHex
+              dart_type: String
             - graphql_type: Latitude
               dart_type: double
             - graphql_type: EmailAddress
@@ -36,7 +38,7 @@ targets:
               use_custom_parser_import: true
               custom_parser_import: "package:mpp/graphql/coercers.dart"
             - graphql_type: Upload
-              custom_parser_import: "package:factory/graphql/coercers.dart"
+              custom_parser_import: "package:mpp/graphql/coercers.dart"
               dart_type:
                 name: MultipartFile
                 imports:

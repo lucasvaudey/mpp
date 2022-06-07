@@ -44,11 +44,9 @@ class VarietyAdapter extends TypeAdapter<Variety> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Variety _$VarietyFromJson(Map<String, dynamic> json) {
-  return Variety(
-    familyName: json['familyName'] as String,
-  );
-}
+Variety _$VarietyFromJson(Map<String, dynamic> json) => Variety(
+      familyName: json['familyName'] as String,
+    );
 
 Map<String, dynamic> _$VarietyToJson(Variety instance) => <String, dynamic>{
       'familyName': instance.familyName,

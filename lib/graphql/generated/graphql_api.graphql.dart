@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gql/ast.dart';
 import 'package:mpp/graphql/coercers.dart';
+import 'package:http/http.dart';
 part 'graphql_api.graphql.g.dart';
 
 mixin AromatCFragMixin {
@@ -58,6 +59,16 @@ mixin ArbreCFragMixin {
   late Rusticity rusticity;
   List<ArbreCFragMixin$Varieties>? varieties;
   List<ArbreCFragMixin$Sickness>? sickness;
+}
+mixin UserInfoMixin {
+  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
+  late int id;
+  late String email;
+  late String pseudo;
+  late bool premium;
+  late bool admin;
+  List<UserInfoMixin$Terrains>? terrains;
+  List<UserInfoMixin$Semis>? semis;
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -146,13 +157,16 @@ class LegumeConstInput extends JsonSerializable with EquatableMixin {
 
   late List<String> advices;
 
-  late List<int> plantMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> plantMonth;
 
   late String recolteDesc;
 
-  late List<int> recolteMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> recolteMonth;
 
-  late List<int> semisMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> semisMonth;
 
   late String soilDesc;
 
@@ -234,11 +248,14 @@ class ArbreConstInput extends JsonSerializable with EquatableMixin {
   @JsonKey(unknownEnumValue: Exposition.artemisUnknown)
   late Exposition exposition;
 
-  late List<int> plantMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> plantMonth;
 
-  late List<int> recolteMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> recolteMonth;
 
-  late List<int> semisMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> semisMonth;
 
   @override
   List<Object?> get props => [
@@ -302,11 +319,14 @@ class AromatConstInput extends JsonSerializable with EquatableMixin {
   @JsonKey(unknownEnumValue: Exposition.artemisUnknown)
   late Exposition exposition;
 
-  late List<int> plantMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> plantMonth;
 
-  late List<int> recolteMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> recolteMonth;
 
-  late List<int> semisMonth;
+  @JsonKey(unknownEnumValue: Month.artemisUnknown)
+  late List<Month> semisMonth;
 
   @override
   List<Object?> get props => [
@@ -575,8 +595,11 @@ class AllAromat$Query$Consts extends JsonSerializable with EquatableMixin {
     return _$AllAromat$Query$ConstsFromJson(json);
   }
 
+  @JsonKey(name: '__typename')
+  String? $$typename;
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [$$typename];
   @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
@@ -641,8 +664,11 @@ class AllLegumes$Query$Consts extends JsonSerializable with EquatableMixin {
     return _$AllLegumes$Query$ConstsFromJson(json);
   }
 
+  @JsonKey(name: '__typename')
+  String? $$typename;
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [$$typename];
   @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
@@ -667,6 +693,155 @@ class AllLegumes$Query extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [consts];
   @override
   Map<String, dynamic> toJson() => _$AllLegumes$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Kw$Const$Query$Kw$const$LegumeConst extends Kw$Const$Query$Kw$const
+    with EquatableMixin {
+  Kw$Const$Query$Kw$const$LegumeConst();
+
+  factory Kw$Const$Query$Kw$const$LegumeConst.fromJson(
+          Map<String, dynamic> json) =>
+      _$Kw$Const$Query$Kw$const$LegumeConstFromJson(json);
+
+  late String description;
+
+  late String label;
+
+  late String defaultBgColor;
+
+  late double baseHeight;
+
+  late double baseWidth;
+
+  late String image;
+
+  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
+  late int id;
+
+  @override
+  List<Object?> get props =>
+      [description, label, defaultBgColor, baseHeight, baseWidth, image, id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$Kw$Const$Query$Kw$const$LegumeConstToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Kw$Const$Query$Kw$const$ArbreConst extends Kw$Const$Query$Kw$const
+    with EquatableMixin {
+  Kw$Const$Query$Kw$const$ArbreConst();
+
+  factory Kw$Const$Query$Kw$const$ArbreConst.fromJson(
+          Map<String, dynamic> json) =>
+      _$Kw$Const$Query$Kw$const$ArbreConstFromJson(json);
+
+  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
+  late int id;
+
+  late String label;
+
+  late String defaultBgColor;
+
+  late double baseHeight;
+
+  late double baseWidth;
+
+  late String image;
+
+  late String description;
+
+  @override
+  List<Object?> get props =>
+      [id, label, defaultBgColor, baseHeight, baseWidth, image, description];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$Kw$Const$Query$Kw$const$ArbreConstToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Kw$Const$Query$Kw$const$AromatConst extends Kw$Const$Query$Kw$const
+    with EquatableMixin {
+  Kw$Const$Query$Kw$const$AromatConst();
+
+  factory Kw$Const$Query$Kw$const$AromatConst.fromJson(
+          Map<String, dynamic> json) =>
+      _$Kw$Const$Query$Kw$const$AromatConstFromJson(json);
+
+  late String label;
+
+  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
+  late int id;
+
+  late String defaultBgColor;
+
+  late double baseHeight;
+
+  late double baseWidth;
+
+  late String image;
+
+  late String description;
+
+  @override
+  List<Object?> get props =>
+      [label, id, defaultBgColor, baseHeight, baseWidth, image, description];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$Kw$Const$Query$Kw$const$AromatConstToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Kw$Const$Query$Kw$const extends JsonSerializable with EquatableMixin {
+  Kw$Const$Query$Kw$const();
+
+  factory Kw$Const$Query$Kw$const.fromJson(Map<String, dynamic> json) {
+    switch (json['__typename'].toString()) {
+      case r'LegumeConst':
+        return Kw$Const$Query$Kw$const$LegumeConst.fromJson(json);
+      case r'ArbreConst':
+        return Kw$Const$Query$Kw$const$ArbreConst.fromJson(json);
+      case r'AromatConst':
+        return Kw$Const$Query$Kw$const$AromatConst.fromJson(json);
+      default:
+    }
+    return _$Kw$Const$Query$Kw$constFromJson(json);
+  }
+
+  @JsonKey(name: '__typename')
+  String? $$typename;
+
+  @override
+  List<Object?> get props => [$$typename];
+  @override
+  Map<String, dynamic> toJson() {
+    switch ($$typename) {
+      case r'LegumeConst':
+        return (this as Kw$Const$Query$Kw$const$LegumeConst).toJson();
+      case r'ArbreConst':
+        return (this as Kw$Const$Query$Kw$const$ArbreConst).toJson();
+      case r'AromatConst':
+        return (this as Kw$Const$Query$Kw$const$AromatConst).toJson();
+      default:
+    }
+    return _$Kw$Const$Query$Kw$constToJson(this);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Kw$Const$Query extends JsonSerializable with EquatableMixin {
+  Kw$Const$Query();
+
+  factory Kw$Const$Query.fromJson(Map<String, dynamic> json) =>
+      _$Kw$Const$QueryFromJson(json);
+
+  @JsonKey(name: 'const')
+  Kw$Const$Query$Kw$const? kw$const;
+
+  @override
+  List<Object?> get props => [kw$const];
+  @override
+  Map<String, dynamic> toJson() => _$Kw$Const$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -718,8 +893,11 @@ class AllArbres$Query$Consts extends JsonSerializable with EquatableMixin {
     return _$AllArbres$Query$ConstsFromJson(json);
   }
 
+  @JsonKey(name: '__typename')
+  String? $$typename;
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [$$typename];
   @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
@@ -925,44 +1103,42 @@ class AllConsts$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User$Terrains$Legumes$Notifs extends JsonSerializable
-    with EquatableMixin {
-  Me$Query$Me$User$Terrains$Legumes$Notifs();
+class Me$Query$Me extends JsonSerializable with EquatableMixin, UserInfoMixin {
+  Me$Query$Me();
 
-  factory Me$Query$Me$User$Terrains$Legumes$Notifs.fromJson(
-          Map<String, dynamic> json) =>
-      _$Me$Query$Me$User$Terrains$Legumes$NotifsFromJson(json);
-
-  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
-  late int id;
-
-  @JsonKey(
-      fromJson: fromGraphQLDateTimeToDartDateTime,
-      toJson: fromDartDateTimeToGraphQLDateTime)
-  late DateTime createdAt;
-
-  late bool done;
-
-  @JsonKey(
-      fromJson: fromGraphQLListNullableDateTimeToDartListNullableDateTime,
-      toJson: fromDartListNullableDateTimeToGraphQLListNullableDateTime)
-  List<DateTime>? notifRappel;
+  factory Me$Query$Me.fromJson(Map<String, dynamic> json) =>
+      _$Me$Query$MeFromJson(json);
 
   @override
-  List<Object?> get props => [id, createdAt, done, notifRappel];
+  List<Object?> get props =>
+      [id, email, pseudo, premium, admin, terrains, semis];
   @override
-  Map<String, dynamic> toJson() =>
-      _$Me$Query$Me$User$Terrains$Legumes$NotifsToJson(this);
+  Map<String, dynamic> toJson() => _$Me$Query$MeToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User$Terrains$Legumes extends JsonSerializable
-    with EquatableMixin {
-  Me$Query$Me$User$Terrains$Legumes();
+class Me$Query extends JsonSerializable with EquatableMixin {
+  Me$Query();
 
-  factory Me$Query$Me$User$Terrains$Legumes.fromJson(
+  factory Me$Query.fromJson(Map<String, dynamic> json) =>
+      _$Me$QueryFromJson(json);
+
+  Me$Query$Me? me;
+
+  @override
+  List<Object?> get props => [me];
+  @override
+  Map<String, dynamic> toJson() => _$Me$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class UserInfoMixin$Terrains$Placeables extends JsonSerializable
+    with EquatableMixin {
+  UserInfoMixin$Terrains$Placeables();
+
+  factory UserInfoMixin$Terrains$Placeables.fromJson(
           Map<String, dynamic> json) =>
-      _$Me$Query$Me$User$Terrains$LegumesFromJson(json);
+      _$UserInfoMixin$Terrains$PlaceablesFromJson(json);
 
   late String bgColor;
 
@@ -982,12 +1158,10 @@ class Me$Query$Me$User$Terrains$Legumes extends JsonSerializable
       toJson: fromDartDateTimeToGraphQLDateTime)
   late DateTime recolteDate;
 
-  List<Me$Query$Me$User$Terrains$Legumes$Notifs>? notifs;
-
   @JsonKey(
-      fromJson: fromGraphQLDateTimeNullableToDartDateTimeNullable,
-      toJson: fromDartDateTimeNullableToGraphQLDateTimeNullable)
-  DateTime? plantDate;
+      fromJson: fromGraphQLDateTimeToDartDateTime,
+      toJson: fromDartDateTimeToGraphQLDateTime)
+  late DateTime plantDate;
 
   late double height;
 
@@ -1004,7 +1178,6 @@ class Me$Query$Me$User$Terrains$Legumes extends JsonSerializable
         posX,
         id,
         recolteDate,
-        notifs,
         plantDate,
         height,
         width,
@@ -1012,15 +1185,15 @@ class Me$Query$Me$User$Terrains$Legumes extends JsonSerializable
       ];
   @override
   Map<String, dynamic> toJson() =>
-      _$Me$Query$Me$User$Terrains$LegumesToJson(this);
+      _$UserInfoMixin$Terrains$PlaceablesToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User$Terrains extends JsonSerializable with EquatableMixin {
-  Me$Query$Me$User$Terrains();
+class UserInfoMixin$Terrains extends JsonSerializable with EquatableMixin {
+  UserInfoMixin$Terrains();
 
-  factory Me$Query$Me$User$Terrains.fromJson(Map<String, dynamic> json) =>
-      _$Me$Query$Me$User$TerrainsFromJson(json);
+  factory UserInfoMixin$Terrains.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoMixin$TerrainsFromJson(json);
 
   @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
   late int id;
@@ -1031,21 +1204,21 @@ class Me$Query$Me$User$Terrains extends JsonSerializable with EquatableMixin {
 
   late double width;
 
-  List<Me$Query$Me$User$Terrains$Legumes>? legumes;
+  List<UserInfoMixin$Terrains$Placeables>? placeables;
 
   @override
-  List<Object?> get props => [id, height, bgColor, width, legumes];
+  List<Object?> get props => [id, height, bgColor, width, placeables];
   @override
-  Map<String, dynamic> toJson() => _$Me$Query$Me$User$TerrainsToJson(this);
+  Map<String, dynamic> toJson() => _$UserInfoMixin$TerrainsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User$Semis$Elements extends JsonSerializable
+class UserInfoMixin$Semis$Elements extends JsonSerializable
     with EquatableMixin {
-  Me$Query$Me$User$Semis$Elements();
+  UserInfoMixin$Semis$Elements();
 
-  factory Me$Query$Me$User$Semis$Elements.fromJson(Map<String, dynamic> json) =>
-      _$Me$Query$Me$User$Semis$ElementsFromJson(json);
+  factory UserInfoMixin$Semis$Elements.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoMixin$Semis$ElementsFromJson(json);
 
   @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
   late int id;
@@ -1072,16 +1245,15 @@ class Me$Query$Me$User$Semis$Elements extends JsonSerializable
   List<Object?> get props =>
       [id, label, recolteDate, plantDate, posColumn, posRow, image];
   @override
-  Map<String, dynamic> toJson() =>
-      _$Me$Query$Me$User$Semis$ElementsToJson(this);
+  Map<String, dynamic> toJson() => _$UserInfoMixin$Semis$ElementsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User$Semis extends JsonSerializable with EquatableMixin {
-  Me$Query$Me$User$Semis();
+class UserInfoMixin$Semis extends JsonSerializable with EquatableMixin {
+  UserInfoMixin$Semis();
 
-  factory Me$Query$Me$User$Semis.fromJson(Map<String, dynamic> json) =>
-      _$Me$Query$Me$User$SemisFromJson(json);
+  factory UserInfoMixin$Semis.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoMixin$SemisFromJson(json);
 
   @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
   late int id;
@@ -1092,261 +1264,14 @@ class Me$Query$Me$User$Semis extends JsonSerializable with EquatableMixin {
 
   late int row;
 
-  late List<Me$Query$Me$User$Semis$Elements> elements;
+  late List<UserInfoMixin$Semis$Elements> elements;
 
   @override
   List<Object?> get props => [id, label, column, row, elements];
   @override
-  Map<String, dynamic> toJson() => _$Me$Query$Me$User$SemisToJson(this);
+  Map<String, dynamic> toJson() => _$UserInfoMixin$SemisToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User$Pot extends JsonSerializable with EquatableMixin {
-  Me$Query$Me$User$Pot();
-
-  factory Me$Query$Me$User$Pot.fromJson(Map<String, dynamic> json) =>
-      _$Me$Query$Me$User$PotFromJson(json);
-
-  late int id;
-
-  late String name;
-
-  @override
-  List<Object?> get props => [id, name];
-  @override
-  Map<String, dynamic> toJson() => _$Me$Query$Me$User$PotToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Me$Query$Me$User extends JsonSerializable with EquatableMixin {
-  Me$Query$Me$User();
-
-  factory Me$Query$Me$User.fromJson(Map<String, dynamic> json) =>
-      _$Me$Query$Me$UserFromJson(json);
-
-  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
-  late int id;
-
-  late String email;
-
-  late String pseudo;
-
-  late bool premium;
-
-  late bool admin;
-
-  List<Me$Query$Me$User$Terrains>? terrains;
-
-  List<Me$Query$Me$User$Semis>? semis;
-
-  List<Me$Query$Me$User$Pot>? pot;
-
-  @override
-  List<Object?> get props =>
-      [id, email, pseudo, premium, admin, terrains, semis, pot];
-  @override
-  Map<String, dynamic> toJson() => _$Me$Query$Me$UserToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Me$Query$Me extends JsonSerializable with EquatableMixin {
-  Me$Query$Me();
-
-  factory Me$Query$Me.fromJson(Map<String, dynamic> json) =>
-      _$Me$Query$MeFromJson(json);
-
-  Me$Query$Me$User? user;
-
-  @override
-  List<Object?> get props => [user];
-  @override
-  Map<String, dynamic> toJson() => _$Me$Query$MeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Me$Query extends JsonSerializable with EquatableMixin {
-  Me$Query();
-
-  factory Me$Query.fromJson(Map<String, dynamic> json) =>
-      _$Me$QueryFromJson(json);
-
-  late Me$Query$Me me;
-
-  @override
-  List<Object?> get props => [me];
-  @override
-  Map<String, dynamic> toJson() => _$Me$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Kw$Const$Query$Kw$const$LegumeConst extends Kw$Const$Query$Kw$const
-    with EquatableMixin {
-  Kw$Const$Query$Kw$const$LegumeConst();
-
-  factory Kw$Const$Query$Kw$const$LegumeConst.fromJson(
-          Map<String, dynamic> json) =>
-      _$Kw$Const$Query$Kw$const$LegumeConstFromJson(json);
-
-  late String description;
-
-  late String label;
-
-  late String defaultBgColor;
-
-  late double baseHeight;
-
-  late double baseWidth;
-
-  late String image;
-
-  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
-  late int id;
-
-  @override
-  List<Object?> get props =>
-      [description, label, defaultBgColor, baseHeight, baseWidth, image, id];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$Kw$Const$Query$Kw$const$LegumeConstToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Kw$Const$Query$Kw$const$ArbreConst extends Kw$Const$Query$Kw$const
-    with EquatableMixin {
-  Kw$Const$Query$Kw$const$ArbreConst();
-
-  factory Kw$Const$Query$Kw$const$ArbreConst.fromJson(
-          Map<String, dynamic> json) =>
-      _$Kw$Const$Query$Kw$const$ArbreConstFromJson(json);
-
-  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
-  late int id;
-
-  late String label;
-
-  late String defaultBgColor;
-
-  late double baseHeight;
-
-  late double baseWidth;
-
-  late String image;
-
-  late String description;
-
-  @override
-  List<Object?> get props =>
-      [id, label, defaultBgColor, baseHeight, baseWidth, image, description];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$Kw$Const$Query$Kw$const$ArbreConstToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Kw$Const$Query$Kw$const$AromatConst extends Kw$Const$Query$Kw$const
-    with EquatableMixin {
-  Kw$Const$Query$Kw$const$AromatConst();
-
-  factory Kw$Const$Query$Kw$const$AromatConst.fromJson(
-          Map<String, dynamic> json) =>
-      _$Kw$Const$Query$Kw$const$AromatConstFromJson(json);
-
-  late String label;
-
-  @JsonKey(fromJson: fromGraphQLIdToDartint, toJson: fromDartintToGraphQLId)
-  late int id;
-
-  late String defaultBgColor;
-
-  late double baseHeight;
-
-  late double baseWidth;
-
-  late String image;
-
-  late String description;
-
-  @override
-  List<Object?> get props =>
-      [label, id, defaultBgColor, baseHeight, baseWidth, image, description];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$Kw$Const$Query$Kw$const$AromatConstToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Kw$Const$Query$Kw$const extends JsonSerializable with EquatableMixin {
-  Kw$Const$Query$Kw$const();
-
-  factory Kw$Const$Query$Kw$const.fromJson(Map<String, dynamic> json) {
-    switch (json['__typename'].toString()) {
-      case r'LegumeConst':
-        return Kw$Const$Query$Kw$const$LegumeConst.fromJson(json);
-      case r'ArbreConst':
-        return Kw$Const$Query$Kw$const$ArbreConst.fromJson(json);
-      case r'AromatConst':
-        return Kw$Const$Query$Kw$const$AromatConst.fromJson(json);
-      default:
-    }
-    return _$Kw$Const$Query$Kw$constFromJson(json);
-  }
-
-  @JsonKey(name: '__typename')
-  String? $$typename;
-
-  @override
-  List<Object?> get props => [$$typename];
-  @override
-  Map<String, dynamic> toJson() {
-    switch ($$typename) {
-      case r'LegumeConst':
-        return (this as Kw$Const$Query$Kw$const$LegumeConst).toJson();
-      case r'ArbreConst':
-        return (this as Kw$Const$Query$Kw$const$ArbreConst).toJson();
-      case r'AromatConst':
-        return (this as Kw$Const$Query$Kw$const$AromatConst).toJson();
-      default:
-    }
-    return _$Kw$Const$Query$Kw$constToJson(this);
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class Kw$Const$Query extends JsonSerializable with EquatableMixin {
-  Kw$Const$Query();
-
-  factory Kw$Const$Query.fromJson(Map<String, dynamic> json) =>
-      _$Kw$Const$QueryFromJson(json);
-
-  @JsonKey(name: 'const')
-  Kw$Const$Query$Kw$const? kw$const;
-
-  @override
-  List<Object?> get props => [kw$const];
-  @override
-  Map<String, dynamic> toJson() => _$Kw$Const$QueryToJson(this);
-}
-
-enum Exposition {
-  @JsonValue('SOLEIL')
-  soleil,
-  @JsonValue('OMBRE')
-  ombre,
-  @JsonValue('MI_OMBRE')
-  miOmbre,
-  @JsonValue('ARTEMIS_UNKNOWN')
-  artemisUnknown,
-}
-enum Rusticity {
-  @JsonValue('TRES_RUSTIQUE')
-  tresRustique,
-  @JsonValue('RUSTIQUE')
-  rustique,
-  @JsonValue('PEU_RUSTIQUE')
-  peuRustique,
-  @JsonValue('ARTEMIS_UNKNOWN')
-  artemisUnknown,
-}
 enum Month {
   @JsonValue('JANVIER')
   janvier,
@@ -1376,6 +1301,28 @@ enum Month {
   artemisUnknown,
 }
 
+enum Exposition {
+  @JsonValue('SOLEIL')
+  soleil,
+  @JsonValue('OMBRE')
+  ombre,
+  @JsonValue('MI_OMBRE')
+  miOmbre,
+  @JsonValue('ARTEMIS_UNKNOWN')
+  artemisUnknown,
+}
+
+enum Rusticity {
+  @JsonValue('TRES_RUSTIQUE')
+  tresRustique,
+  @JsonValue('RUSTIQUE')
+  rustique,
+  @JsonValue('PEU_RUSTIQUE')
+  peuRustique,
+  @JsonValue('ARTEMIS_UNKNOWN')
+  artemisUnknown,
+}
+
 @JsonSerializable(explicitToJson: true)
 class RemoveConstArguments extends JsonSerializable with EquatableMixin {
   RemoveConstArguments({required this.id});
@@ -1392,6 +1339,7 @@ class RemoveConstArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$RemoveConstArgumentsToJson(this);
 }
 
+final REMOVE_CONST_MUTATION_DOCUMENT_OPERATION_NAME = 'RemoveConst';
 final REMOVE_CONST_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.mutation,
@@ -1426,7 +1374,7 @@ class RemoveConstMutation
   final DocumentNode document = REMOVE_CONST_MUTATION_DOCUMENT;
 
   @override
-  final String operationName = 'RemoveConst';
+  final String operationName = REMOVE_CONST_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
   final RemoveConstArguments variables;
@@ -1440,25 +1388,37 @@ class RemoveConstMutation
 
 @JsonSerializable(explicitToJson: true)
 class AddConstArguments extends JsonSerializable with EquatableMixin {
-  AddConstArguments({required this.constant});
+  AddConstArguments({required this.image, required this.constant});
 
   @override
   factory AddConstArguments.fromJson(Map<String, dynamic> json) =>
       _$AddConstArgumentsFromJson(json);
 
+  @JsonKey(
+      fromJson: fromGraphQLUploadToDartMultipartFile,
+      toJson: fromDartMultipartFileToGraphQLUpload)
+  late MultipartFile image;
+
   late ConstInput constant;
 
   @override
-  List<Object?> get props => [constant];
+  List<Object?> get props => [image, constant];
   @override
   Map<String, dynamic> toJson() => _$AddConstArgumentsToJson(this);
 }
 
+final ADD_CONST_MUTATION_DOCUMENT_OPERATION_NAME = 'AddConst';
 final ADD_CONST_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.mutation,
       name: NameNode(value: 'AddConst'),
       variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'image')),
+            type:
+                NamedTypeNode(name: NameNode(value: 'Upload'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'constant')),
             type: NamedTypeNode(
@@ -1472,6 +1432,9 @@ final ADD_CONST_MUTATION_DOCUMENT = DocumentNode(definitions: [
             name: NameNode(value: 'addConst'),
             alias: null,
             arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'image'),
+                  value: VariableNode(name: NameNode(value: 'image'))),
               ArgumentNode(
                   name: NameNode(value: 'constant'),
                   value: VariableNode(name: NameNode(value: 'constant')))
@@ -1489,7 +1452,7 @@ class AddConstMutation
   final DocumentNode document = ADD_CONST_MUTATION_DOCUMENT;
 
   @override
-  final String operationName = 'AddConst';
+  final String operationName = ADD_CONST_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
   final AddConstArguments variables;
@@ -1519,6 +1482,7 @@ class ConnectionArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$ConnectionArgumentsToJson(this);
 }
 
+final CONNECTION_MUTATION_DOCUMENT_OPERATION_NAME = 'Connection';
 final CONNECTION_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.mutation,
@@ -1640,7 +1604,7 @@ class ConnectionMutation
   final DocumentNode document = CONNECTION_MUTATION_DOCUMENT;
 
   @override
-  final String operationName = 'Connection';
+  final String operationName = CONNECTION_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
   final ConnectionArguments variables;
@@ -1673,6 +1637,7 @@ class RegisterArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$RegisterArgumentsToJson(this);
 }
 
+final REGISTER_MUTATION_DOCUMENT_OPERATION_NAME = 'Register';
 final REGISTER_MUTATION_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.mutation,
@@ -1778,7 +1743,7 @@ class RegisterMutation
   final DocumentNode document = REGISTER_MUTATION_DOCUMENT;
 
   @override
-  final String operationName = 'Register';
+  final String operationName = REGISTER_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
   final RegisterArguments variables;
@@ -1808,6 +1773,7 @@ class AllAromatArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$AllAromatArgumentsToJson(this);
 }
 
+final ALL_AROMAT_QUERY_DOCUMENT_OPERATION_NAME = 'AllAromat';
 final ALL_AROMAT_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
@@ -1839,6 +1805,12 @@ final ALL_AROMAT_QUERY_DOCUMENT = DocumentNode(definitions: [
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
               InlineFragmentNode(
                   typeCondition: TypeConditionNode(
                       on: NamedTypeNode(
@@ -1916,7 +1888,7 @@ class AllAromatQuery extends GraphQLQuery<AllAromat$Query, AllAromatArguments> {
   final DocumentNode document = ALL_AROMAT_QUERY_DOCUMENT;
 
   @override
-  final String operationName = 'AllAromat';
+  final String operationName = ALL_AROMAT_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
   final AllAromatArguments variables;
@@ -1946,6 +1918,7 @@ class AllLegumesArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$AllLegumesArgumentsToJson(this);
 }
 
+final ALL_LEGUMES_QUERY_DOCUMENT_OPERATION_NAME = 'AllLegumes';
 final ALL_LEGUMES_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
@@ -1977,6 +1950,12 @@ final ALL_LEGUMES_QUERY_DOCUMENT = DocumentNode(definitions: [
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
               InlineFragmentNode(
                   typeCondition: TypeConditionNode(
                       on: NamedTypeNode(
@@ -2055,7 +2034,7 @@ class AllLegumesQuery
   final DocumentNode document = ALL_LEGUMES_QUERY_DOCUMENT;
 
   @override
-  final String operationName = 'AllLegumes';
+  final String operationName = ALL_LEGUMES_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
   final AllLegumesArguments variables;
@@ -2065,6 +2044,225 @@ class AllLegumesQuery
   @override
   AllLegumes$Query parse(Map<String, dynamic> json) =>
       AllLegumes$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Kw$ConstArguments extends JsonSerializable with EquatableMixin {
+  Kw$ConstArguments({required this.constId});
+
+  @override
+  factory Kw$ConstArguments.fromJson(Map<String, dynamic> json) =>
+      _$Kw$ConstArgumentsFromJson(json);
+
+  late int constId;
+
+  @override
+  List<Object?> get props => [constId];
+  @override
+  Map<String, dynamic> toJson() => _$Kw$ConstArgumentsToJson(this);
+}
+
+final KW$_CONST_QUERY_DOCUMENT_OPERATION_NAME = 'Const';
+final KW$_CONST_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'Const'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'constId')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'const'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'id'),
+                  value: VariableNode(name: NameNode(value: 'constId')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              InlineFragmentNode(
+                  typeCondition: TypeConditionNode(
+                      on: NamedTypeNode(
+                          name: NameNode(value: 'LegumeConst'),
+                          isNonNull: false)),
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'description'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'label'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'defaultBgColor'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'baseHeight'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'baseWidth'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'image'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              InlineFragmentNode(
+                  typeCondition: TypeConditionNode(
+                      on: NamedTypeNode(
+                          name: NameNode(value: 'ArbreConst'),
+                          isNonNull: false)),
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'label'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'defaultBgColor'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'baseHeight'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'baseWidth'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'image'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'description'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              InlineFragmentNode(
+                  typeCondition: TypeConditionNode(
+                      on: NamedTypeNode(
+                          name: NameNode(value: 'AromatConst'),
+                          isNonNull: false)),
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'label'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'defaultBgColor'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'baseHeight'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'baseWidth'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'image'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'description'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ]))
+            ]))
+      ]))
+]);
+
+class Kw$ConstQuery extends GraphQLQuery<Kw$Const$Query, Kw$ConstArguments> {
+  Kw$ConstQuery({required this.variables});
+
+  @override
+  final DocumentNode document = KW$_CONST_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = KW$_CONST_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final Kw$ConstArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  Kw$Const$Query parse(Map<String, dynamic> json) =>
+      Kw$Const$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2085,6 +2283,7 @@ class AllArbresArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$AllArbresArgumentsToJson(this);
 }
 
+final ALL_ARBRES_QUERY_DOCUMENT_OPERATION_NAME = 'AllArbres';
 final ALL_ARBRES_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
@@ -2116,6 +2315,12 @@ final ALL_ARBRES_QUERY_DOCUMENT = DocumentNode(definitions: [
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
               InlineFragmentNode(
                   typeCondition: TypeConditionNode(
                       on: NamedTypeNode(
@@ -2297,7 +2502,7 @@ class AllArbresQuery extends GraphQLQuery<AllArbres$Query, AllArbresArguments> {
   final DocumentNode document = ALL_ARBRES_QUERY_DOCUMENT;
 
   @override
-  final String operationName = 'AllArbres';
+  final String operationName = ALL_ARBRES_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
   final AllArbresArguments variables;
@@ -2327,6 +2532,7 @@ class AllConstsArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$AllConstsArgumentsToJson(this);
 }
 
+final ALL_CONSTS_QUERY_DOCUMENT_OPERATION_NAME = 'AllConsts';
 final ALL_CONSTS_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
@@ -2677,7 +2883,7 @@ class AllConstsQuery extends GraphQLQuery<AllConsts$Query, AllConstsArguments> {
   final DocumentNode document = ALL_CONSTS_QUERY_DOCUMENT;
 
   @override
-  final String operationName = 'AllConsts';
+  final String operationName = ALL_CONSTS_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
   final AllConstsArguments variables;
@@ -2689,6 +2895,7 @@ class AllConstsQuery extends GraphQLQuery<AllConsts$Query, AllConstsArguments> {
       AllConsts$Query.fromJson(json);
 }
 
+final ME_QUERY_DOCUMENT_OPERATION_NAME = 'Me';
 final ME_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
@@ -2702,8 +2909,182 @@ final ME_QUERY_DOCUMENT = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                  name: NameNode(value: 'UserInfo'), directives: [])
+            ]))
+      ])),
+  FragmentDefinitionNode(
+      name: NameNode(value: 'UserInfo'),
+      typeCondition: TypeConditionNode(
+          on: NamedTypeNode(name: NameNode(value: 'User'), isNonNull: false)),
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'email'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'pseudo'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'premium'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'admin'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: 'terrains'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                  name: NameNode(value: 'user'),
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'height'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'bgColor'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'width'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'placeables'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'bgColor'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'subName'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'label'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'posY'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'posX'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'recolteDate'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'plantDate'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'height'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'width'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'image'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ]))
+            ])),
+        FieldNode(
+            name: NameNode(value: 'semis'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'label'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'column'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'row'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'elements'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -2715,263 +3096,41 @@ final ME_QUERY_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'email'),
+                        name: NameNode(value: 'label'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'pseudo'),
+                        name: NameNode(value: 'recolteDate'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'premium'),
+                        name: NameNode(value: 'plantDate'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'admin'),
+                        name: NameNode(value: 'posColumn'),
                         alias: null,
                         arguments: [],
                         directives: [],
                         selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'terrains'),
+                        name: NameNode(value: 'posRow'),
                         alias: null,
                         arguments: [],
                         directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'height'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'bgColor'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'width'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'legumes'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'bgColor'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'subName'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'label'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'posY'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'posX'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'id'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'recolteDate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'notifs'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'id'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'createdAt'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'done'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'notifRappel'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'plantDate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'height'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'width'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'image'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
+                        selectionSet: null),
                     FieldNode(
-                        name: NameNode(value: 'semis'),
+                        name: NameNode(value: 'image'),
                         alias: null,
                         arguments: [],
                         directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'label'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'column'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'row'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'elements'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'id'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'label'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'recolteDate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'plantDate'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'posColumn'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'posRow'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'image'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'pot'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'id'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'name'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null)
-                        ]))
+                        selectionSet: null)
                   ]))
             ]))
       ]))
@@ -2984,228 +3143,10 @@ class MeQuery extends GraphQLQuery<Me$Query, JsonSerializable> {
   final DocumentNode document = ME_QUERY_DOCUMENT;
 
   @override
-  final String operationName = 'Me';
+  final String operationName = ME_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
   List<Object?> get props => [document, operationName];
   @override
   Me$Query parse(Map<String, dynamic> json) => Me$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Kw$ConstArguments extends JsonSerializable with EquatableMixin {
-  Kw$ConstArguments({required this.constId});
-
-  @override
-  factory Kw$ConstArguments.fromJson(Map<String, dynamic> json) =>
-      _$Kw$ConstArgumentsFromJson(json);
-
-  late int constId;
-
-  @override
-  List<Object?> get props => [constId];
-  @override
-  Map<String, dynamic> toJson() => _$Kw$ConstArgumentsToJson(this);
-}
-
-final KW$_CONST_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'Const'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'constId')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'const'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'id'),
-                  value: VariableNode(name: NameNode(value: 'constId')))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              InlineFragmentNode(
-                  typeCondition: TypeConditionNode(
-                      on: NamedTypeNode(
-                          name: NameNode(value: 'LegumeConst'),
-                          isNonNull: false)),
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'description'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'label'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'defaultBgColor'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'baseHeight'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'baseWidth'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'image'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              InlineFragmentNode(
-                  typeCondition: TypeConditionNode(
-                      on: NamedTypeNode(
-                          name: NameNode(value: 'ArbreConst'),
-                          isNonNull: false)),
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'label'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'defaultBgColor'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'baseHeight'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'baseWidth'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'image'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'description'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ])),
-              InlineFragmentNode(
-                  typeCondition: TypeConditionNode(
-                      on: NamedTypeNode(
-                          name: NameNode(value: 'AromatConst'),
-                          isNonNull: false)),
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'label'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'defaultBgColor'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'baseHeight'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'baseWidth'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'image'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'description'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null)
-                  ]))
-            ]))
-      ]))
-]);
-
-class Kw$ConstQuery extends GraphQLQuery<Kw$Const$Query, Kw$ConstArguments> {
-  Kw$ConstQuery({required this.variables});
-
-  @override
-  final DocumentNode document = KW$_CONST_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = 'Const';
-
-  @override
-  final Kw$ConstArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  Kw$Const$Query parse(Map<String, dynamic> json) =>
-      Kw$Const$Query.fromJson(json);
 }

@@ -30,16 +30,20 @@ class RegisterProvider extends ChangeNotifier {
     if (response.data?.register.token != null &&
         response.data?.register.user?.id != null) {
       User newUser = User(
-          id: response.data!.register.user!.id,
-          pseudo: pseudo,
-          email: email,
-          token: Token(
-            access: response.data!.register.token!.access,
-            refresh: response.data!.register.token!.refresh,
-          ));
+        id: response.data!.register.user!.id,
+        pseudo: pseudo,
+        email: email,
+        token: Token(
+          access: response.data!.register.token!.access,
+          refresh: response.data!.register.token!.refresh,
+        ),
+      );
       Hive.box<User>('user').put('current', newUser);
       Navigator.pushNamedAndRemoveUntil(
-          context, SplashScreen.route, (route) => false);
+        context,
+        SplashScreen.route,
+        (route) => false,
+      );
     } else {
       print(response.errors.toString());
     }

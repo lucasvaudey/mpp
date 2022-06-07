@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mpp/models/const/const_element.dart';
 import 'package:mpp/graphql/generated/graphql_api.dart';
 import 'package:mpp/models/enums/hive_exposition.dart';
-import 'package:mpp/models/enums/month.dart';
+import 'package:mpp/models/enums/hive_month.dart';
 import 'package:mpp/models/info/sickness.dart';
 import 'package:mpp/models/info/variety.dart';
 
@@ -15,23 +15,23 @@ class ArbreConst extends ConstElement {
   @HiveField(14)
   String familyName;
 
-  ArbreConst(
-      {required int id,
-      required double baseHeight,
-      required double baseWidth,
-      required String defaultBgColor,
-      required String description,
-      required String image,
-      required String label,
-      required HiveExposition exposition,
-      List<String>? advices,
-      List<Sickness>? sickness,
-      List<Variety>? varieties,
-      List<HiveMonth>? plantMonth,
-      List<HiveMonth>? semisMonth,
-      List<HiveMonth>? recolteMonth,
-      required this.familyName})
-      : super(
+  ArbreConst({
+    required int id,
+    required double baseHeight,
+    required double baseWidth,
+    required String defaultBgColor,
+    required String description,
+    required String image,
+    required String label,
+    required HiveExposition exposition,
+    List<String>? advices,
+    List<Sickness>? sickness,
+    List<Variety>? varieties,
+    List<HiveMonth>? plantMonth,
+    List<HiveMonth>? semisMonth,
+    List<HiveMonth>? recolteMonth,
+    required this.familyName,
+  }) : super(
           id: id,
           baseHeight: baseHeight,
           baseWidth: baseWidth,
@@ -56,14 +56,15 @@ class ArbreConst extends ConstElement {
 
   ArbreConst fromFrag(ArbreCFragMixin data) {
     return ArbreConst(
-        id: data.id,
-        baseHeight: data.baseHeight,
-        baseWidth: data.baseWidth,
-        defaultBgColor: data.defaultBgColor,
-        description: data.description,
-        image: data.image,
-        label: data.label,
-        exposition: data.exposition.hive,
-        familyName: "");
+      id: data.id,
+      baseHeight: data.baseHeight,
+      baseWidth: data.baseWidth,
+      defaultBgColor: data.defaultBgColor,
+      description: data.description,
+      image: data.image,
+      label: data.label,
+      exposition: data.exposition.hive,
+      familyName: "",
+    );
   }
 }

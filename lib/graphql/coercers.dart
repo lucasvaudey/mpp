@@ -18,10 +18,12 @@ String fromDartDateTimeToGraphQLDateTime(DateTime date) =>
     timeFormatter.format(date);
 
 List<DateTime>? fromDartListNullableDateTimeToGraphQLListNullableDateTime(
-        List<DateTime>? times) =>
+  List<DateTime>? times,
+) =>
     times;
 List<DateTime>? fromGraphQLListNullableDateTimeToDartListNullableDateTime(
-        List<DateTime>? times) =>
+  List<DateTime>? times,
+) =>
     times;
 
 //DateTime?
@@ -38,48 +40,58 @@ String? fromDartDateTimeNullableToGraphQLDateTimeNullable(DateTime? date) =>
 
 // productPhotos: [Upload!]!
 List<MultipartFile> fromGraphQLListUploadToDartListMultipartFile(
-        List<MultipartFile> file) =>
+  List<MultipartFile> file,
+) =>
     file;
 List<MultipartFile> fromDartListMultipartFileToGraphQLListUpload(
-        List<MultipartFile> file) =>
+  List<MultipartFile> file,
+) =>
     file;
 
 // moreImages: [Upload!]
 List<MultipartFile>?
     fromGraphQLListNullableUploadToDartListNullableMultipartFile(
-            List<MultipartFile>? file) =>
+  List<MultipartFile>? file,
+) =>
         file;
 List<MultipartFile>?
     fromDartListNullableMultipartFileToGraphQLListNullableUpload(
-            List<MultipartFile>? file) =>
+  List<MultipartFile>? file,
+) =>
         file;
 
 // logoSmall: Upload
 MultipartFile? fromGraphQLUploadNullableToDartMultipartFileNullable(
-        MultipartFile? file) =>
+  MultipartFile? file,
+) =>
     file;
 MultipartFile? fromDartMultipartFileNullableToGraphQLUploadNullable(
-        MultipartFile? file) =>
+  MultipartFile? file,
+) =>
     file;
 
 // productPhotosSmall: [Upload]
 List<MultipartFile?>?
     fromDartListNullableMultipartFileNullableToGraphQLListNullableUploadNullable(
-            List<MultipartFile?>? file) =>
+  List<MultipartFile?>? file,
+) =>
         file;
 List<MultipartFile?>?
     fromGraphQLListNullableUploadNullableToDartListNullableMultipartFileNullable(
-            List<MultipartFile?>? file) =>
+  List<MultipartFile?>? file,
+) =>
         file;
 
 // productPhotosSmall: [Upload]!
 List<MultipartFile?>
     fromGraphQLListUploadNullableToDartListMultipartFileNullable(
-            List<MultipartFile?> file) =>
+  List<MultipartFile?> file,
+) =>
         file;
 List<MultipartFile?>
     fromDartListMultipartFileNullableToGraphQLListUploadNullable(
-            List<MultipartFile?> file) =>
+  List<MultipartFile?> file,
+) =>
         file;
 
 ///ID

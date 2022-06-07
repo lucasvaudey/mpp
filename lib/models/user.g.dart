@@ -68,25 +68,23 @@ class UserAdapter extends TypeAdapter<User> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return User(
-    id: json['id'] as int,
-    pseudo: json['pseudo'] as String,
-    email: json['email'] as String,
-    token: Token.fromJson(json['token'] as Map<String, dynamic>),
-    terrains: (json['terrains'] as List<dynamic>?)
-        ?.map((e) => Terrain.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    admin: json['admin'] as bool,
-    premium: json['premium'] as bool,
-    semis: (json['semis'] as List<dynamic>?)
-        ?.map((e) => Semis.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    pots: (json['pots'] as List<dynamic>?)
-        ?.map((e) => Pot.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      id: json['id'] as int,
+      pseudo: json['pseudo'] as String,
+      email: json['email'] as String,
+      token: Token.fromJson(json['token'] as Map<String, dynamic>),
+      terrains: (json['terrains'] as List<dynamic>?)
+          ?.map((e) => Terrain.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      admin: json['admin'] as bool? ?? false,
+      premium: json['premium'] as bool? ?? false,
+      semis: (json['semis'] as List<dynamic>?)
+          ?.map((e) => Semis.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      pots: (json['pots'] as List<dynamic>?)
+          ?.map((e) => Pot.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$UserToJson(User instance) {
   final val = <String, dynamic>{

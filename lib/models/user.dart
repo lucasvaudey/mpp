@@ -38,20 +38,21 @@ class User {
   @HiveField(8)
   List<Semis>? semis;
 
-  User(
-      {required this.id,
-      required this.pseudo,
-      required this.email,
-      required this.token,
-      this.terrains,
-      this.admin = false,
-      this.premium = false,
-      this.semis,
-      this.pots});
+  User({
+    required this.id,
+    required this.pseudo,
+    required this.email,
+    required this.token,
+    this.terrains,
+    this.admin = false,
+    this.premium = false,
+    this.semis,
+    this.pots,
+  });
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  static User fromMeQuery(Me$Query$Me$User data, Token token) {
+  static User fromFrag(UserInfoMixin data, Token token) {
     //TODO: Parsing the terrains, etc
     return User(
       id: data.id,

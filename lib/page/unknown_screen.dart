@@ -16,7 +16,10 @@ class _UnknownScreenState extends State<UnknownScreen> {
   void initState() {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushNamedAndRemoveUntil(
-          context, SplashScreen.route, (route) => false);
+        context,
+        SplashScreen.route,
+        (route) => false,
+      );
     });
     super.initState();
   }

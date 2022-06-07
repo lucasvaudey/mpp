@@ -47,12 +47,10 @@ class TokenAdapter extends TypeAdapter<Token> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Token _$TokenFromJson(Map<String, dynamic> json) {
-  return Token(
-    access: json['access'] as String,
-    refresh: json['refresh'] as String,
-  );
-}
+Token _$TokenFromJson(Map<String, dynamic> json) => Token(
+      access: json['access'] as String,
+      refresh: json['refresh'] as String,
+    );
 
 Map<String, dynamic> _$TokenToJson(Token instance) => <String, dynamic>{
       'access': instance.access,

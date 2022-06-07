@@ -1,3 +1,3 @@
-mutation AddConst($constant: ConstInput!) {
-  addConst(constant: $constant)
+mutation AddConst($image: Upload!, $constant: ConstInput!) {
+  addConst(image: $image, constant: $constant)
 }

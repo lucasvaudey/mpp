@@ -1,0 +1,41 @@
+fragment UserInfo on User {
+  id
+  email
+  pseudo
+  premium
+  admin
+  terrains {
+    id
+    height
+    bgColor
+    width
+    placeables {
+      bgColor
+      subName
+      label
+      posY
+      posX
+      id
+      recolteDate
+      plantDate
+      height
+      width
+      image
+    }
+  }
+  semis {
+    id
+    label
+    column
+    row
+    elements {
+      id
+      label
+      recolteDate
+      plantDate
+      posColumn
+      posRow
+      image
+    }
+  }
+}

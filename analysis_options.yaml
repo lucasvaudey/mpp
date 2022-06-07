@@ -8,8 +8,13 @@
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
+
 analyzer:
-  exclude: [lib/graphql/generated/*]
+  exclude:
+    - lib/graphql/generated/**
+    - lib/graphql/generated/graphql_api.graphql.dart
+  plugins:
+    - dart_code_metrics
 
 linter:
   # The lint rules applied to this project can be customized in the
@@ -24,7 +29,69 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
+    depend_on_referenced_packages: false
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    cyclomatic-complexity: 20
+    maximum-nesting-level: 5
+    number-of-parameters: 5
+    source-lines-of-code: 200
+  metrics-exclude:
+    - test/**
+    - lib/generated/**
+    - lib/generated_plugin_registrant.dart
+    - lib/graphql/generated/**
+    - lib/graphql/generated/graphql_api.graphql.dart
+  rules:
+    - avoid-unused-parameters
+    - avoid-dynamic
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-missing-enum-constant-in-map
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 5
+    - avoid-non-ascii-symbols
+    - avoid-throw-in-catch-block
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unused-parameters
+    - double-literal-format
+    - no-boolean-literal-compare
+    - prefer-trailing-comma
+    - prefer-conditional-expressions
+    - prefer-first
+    - no-equal-then-else
+    - no-object-declaration
+    - prefer-commenting-analyzer-ignores
+    - prefer-immediate-return
+    - prefer-last
+    - prefer-match-file-name
+    - prefer-const-border-radius
+    - check-unused-l10n
+    - always-remove-listener
+    - avoid-border-all
+    - avoid-returning-widgets
+    - avoid-unnecessary-setstate
+    - prefer-single-widget-per-file
+  exclude-rules:
+    - prefer-extracting-callbacks:
+    - avoid-non-null-assertion
+    - avoid-wrapping-in-padding
+    - avoid-late-keyword
+    - no-equal-arguments
+    - depend_on_referenced_packages
+    - newline-before-return
+    - no-magic-number
+    - no-empty-block
+    - avoid-ignoring-return-values
+    - avoid-unrelated-type-assertions
+    - binary-expression-operand-order
+    - prefer-async-await
+    - prefer-moving-to-variable

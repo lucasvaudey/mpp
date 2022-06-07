@@ -44,11 +44,9 @@ class PotAdapter extends TypeAdapter<Pot> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Pot _$PotFromJson(Map<String, dynamic> json) {
-  return Pot(
-    id: json['id'] as int,
-  );
-}
+Pot _$PotFromJson(Map<String, dynamic> json) => Pot(
+      id: json['id'] as int,
+    );
 
 Map<String, dynamic> _$PotToJson(Pot instance) => <String, dynamic>{
       'id': instance.id,

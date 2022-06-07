@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'month.dart';
+part of 'hive_month.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

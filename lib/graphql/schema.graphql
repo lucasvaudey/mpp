@@ -1,7 +1,7 @@
 type LegumeConst implements ConstElement {
   id: ID!
   label: String!
-  defaultBgColor: String!
+  defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
@@ -17,22 +17,23 @@ type LegumeConst implements ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  exposition: exposition!
+  exposition: Exposition!
 
   """
   Give an array of months
   """
-  plantMonth: [month!]
+  plantMonth: [Month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [month!]
+  recolteMonth: [Month!]
 
   """
   Give an array of months
   """
-  semisMonth: [month!]
+  semisMonth: [Month!]
+  official: Boolean
 
   """
   Description of the soil needed
@@ -54,7 +55,7 @@ type LegumeConst implements ConstElement {
 interface ConstElement {
   id: ID!
   label: String!
-  defaultBgColor: String!
+  defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
@@ -70,23 +71,29 @@ interface ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  exposition: exposition!
+  exposition: Exposition!
 
   """
   Give an array of months
   """
-  plantMonth: [month!]
+  plantMonth: [Month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [month!]
+  recolteMonth: [Month!]
 
   """
   Give an array of months
   """
-  semisMonth: [month!]
+  semisMonth: [Month!]
+  official: Boolean
 }
+
+"""
+Hexadecimal Color
+"""
+scalar ColorHex
 
 """
 The URL scalar type represents URL addresses.
@@ -111,7 +118,7 @@ type Variety {
 """
 Exposition type
 """
-enum exposition {
+enum Exposition {
   SOLEIL
   OMBRE
   MI_OMBRE
@@ -120,7 +127,7 @@ enum exposition {
 """
 Months of the year
 """
-enum month {
+enum Month {
   JANVIER
   FEVRIER
   MARS
@@ -135,10 +142,10 @@ enum month {
   DECEMBRE
 }
 
-type ArbreConst implements ConstElement {
+type AromatConst implements ConstElement {
   id: ID!
   label: String!
-  defaultBgColor: String!
+  defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
@@ -154,22 +161,66 @@ type ArbreConst implements ConstElement {
   advices: [String!]
   sickness: [Sickness!]
   varieties: [Variety!]
-  exposition: exposition!
+  exposition: Exposition!
 
   """
   Give an array of months
   """
-  plantMonth: [month!]
+  plantMonth: [Month!]
 
   """
   Give an array of months
   """
-  recolteMonth: [month!]
+  recolteMonth: [Month!]
 
   """
   Give an array of months
   """
-  semisMonth: [month!]
+  semisMonth: [Month!]
+  official: Boolean
+
+  """
+  Description of the soil needed
+  """
+  soilDesc: String!
+}
+
+type ArbreConst implements ConstElement {
+  id: ID!
+  label: String!
+  defaultBgColor: ColorHex!
+  baseHeight: Float!
+  baseWidth: Float!
+  image: URL!
+
+  """
+  Short description of the constants
+  """
+  description: String!
+
+  """
+  Conseils sur les légumes
+  """
+  advices: [String!]
+  sickness: [Sickness!]
+  varieties: [Variety!]
+  exposition: Exposition!
+
+  """
+  Give an array of months
+  """
+  plantMonth: [Month!]
+
+  """
+  Give an array of months
+  """
+  recolteMonth: [Month!]
+
+  """
+  Give an array of months
+  """
+  semisMonth: [Month!]
+  official: Boolean
 
   """
   Description of the climat needed
@@ -190,68 +241,22 @@ type ArbreConst implements ConstElement {
   Give an array of months
   """
   tailleMonth: [Int!]!
-  rusticity: rusticity!
+  rusticity: Rusticity!
 }
 
 """
 Rusticity type
 """
-enum rusticity {
+enum Rusticity {
   TRES_RUSTIQUE
   RUSTIQUE
   PEU_RUSTIQUE
 }
 
-type AromatConst implements ConstElement {
-  id: ID!
-  label: String!
-  defaultBgColor: String!
-  baseHeight: Float!
-  baseWidth: Float!
-  image: URL!
-
-  """
-  Short description of the constants
-  """
-  description: String!
-
-  """
-  Conseils sur les légumes
-  """
-  advices: [String!]
-  sickness: [Sickness!]
-  varieties: [Variety!]
-  exposition: exposition!
-
-  """
-  Give an array of months
-  """
-  plantMonth: [month!]
-
-  """
-  Give an array of months
-  """
-  recolteMonth: [month!]
-
-  """
-  Give an array of months
-  """
-  semisMonth: [month!]
-
-  """
-  Description of the soil needed
-  """
-  soilDesc: String!
-}
-
 type Query {
-  me: UserResponse!
+  me: User
   const(id: Int!): ConstElement
   consts(pageNumber: Int!, numberInPage: Int!): [ConstElement!]
-}
-
-type UserResponse {
-  user: User
 }
 
 type User {
@@ -264,7 +269,6 @@ type User {
   admin: Boolean!
   terrains: [Terrain!]
   semis: [Semis!]
-  pot: [Pot!]
   posts: [Post!]
 }
 
@@ -277,35 +281,54 @@ type Terrain {
   id: ID!
   height: Float!
   width: Float!
-  bgColor: String!
-  legumes: [Legume!]
+  bgColor: ColorHex!
+  placeables: [Placeable!]
   user: User!
 }
 
-type Legume {
+type Placeable {
   id: ID!
   posX: Float
   posY: Float
   label: String!
   subName: String
-  bgColor: String!
+  bgColor: ColorHex!
   recolteDate: DateTime!
-  plantDate: DateTime
-  notifs: [Notif!]
+  plantDate: DateTime!
+  reminders: [Reminder!]
   height: Float!
   width: Float!
   image: URL
+  constant: ConstElement!
+  type: PlaceableType!
+  pot: Boolean
   terrain: Terrain!
 }
 
-type Notif {
+type Reminder {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   endDate: DateTime!
-  done: Boolean!
-  notifRappel: [DateTime!]
-  legume: Legume!
+  done: Boolean
+  plannedNotifs: [PlannedNotif!]
+  placeable: Placeable!
+}
+
+type PlannedNotif {
+  date: DateTime!
+  scheduled: Boolean!
+  reminder: Reminder!
+}
+
+"""
+Placeable type of the element
+"""
+enum PlaceableType {
+  ARBRE
+  LEGUME
+  AROMAT
+  CUSTOM
 }
 
 type Semis {
@@ -328,12 +351,6 @@ type SemiElement {
   semis: Semis!
 }
 
-type Pot {
-  id: Int!
-  name: String!
-  user: User!
-}
-
 type Post {
   id: Int!
   title: String!
@@ -343,10 +360,25 @@ type Post {
 }
 
 type Mutation {
-  addLegume(legumeId: Float!, terrainId: Float!, legume: LegumeInput!): Boolean!
+  addPlaceable(
+    constId: Float!
+    terrainId: Float!
+    placeable: PlaceableInput!
+  ): BoolResponse!
+  addCustomPlaceable(
+    terrainId: Float!
+    placeable: PlaceableInput!
+  ): BoolResponse!
+  removePlaceable(id: Float!): BoolResponse!
+  updatePlaceable(input: PlaceableInput!, placeableID: Float!): BoolResponse!
   addTerrain(terrain: TerrainInput!): Boolean!
+  removeTerrain(id: ID!): Boolean!
+  updateTerrain(id: ID!, input: TerrainUpdateInput!): BoolResponse!
+  addReminder(notifInput: ReminderInput!, placeableId: Float!): BoolResponse!
+  deleteReminder(reminderId: Float!): BoolResponse!
+  updateReminder(input: ReminderInput!, reminderId: Float!): BoolResponse!
   changePassword(
-    newPassword: String!
+    newPerssword: String!
     oldPassword: String!
   ): ConnectionResponse!
   refreshToken: ConnectionResponse!
@@ -356,27 +388,67 @@ type Mutation {
     pseudo: String!
     email: String!
   ): ConnectionResponse!
-  addConst(constant: ConstInput!): Boolean!
+  deleteUser(id: ID!): BoolResponse!
+
+  """
+  Update user data, if id null update connected user
+  """
+  updateUser(input: UserInput!, id: ID): BoolResponse!
+  addConst(image: Upload!, constant: ConstInput!): Boolean!
   removeConst(id: Int!): Boolean!
+  updateConst(id: Int!, input: ConstInput!): Boolean!
 }
 
-input LegumeInput {
-  bgColor: String!
-  width: Int!
-  height: Int!
+type BoolResponse {
+  success: Boolean!
+  error: CustomError
+}
+
+type CustomError {
+  label: String!
+  message: String!
+}
+
+input PlaceableInput {
+  label: String
+  bgColor: ColorHex
+  width: Float
+  height: Float
   recolteDate: DateTime!
+
+  """
+  Mis à aujourd'hui si null
+  """
   plantDate: DateTime
+  reminders: [ReminderInput!]
+}
+
+input ReminderInput {
+  plannedNotif: [PlannedNotifInput!]
+  endDate: DateTime!
+  done: Boolean!
+}
+
+input PlannedNotifInput {
+  date: DateTime!
+  scheduled: Boolean!
 }
 
 input TerrainInput {
   width: Float!
   height: Float!
-  bgColor: String!
+  bgColor: ColorHex!
+}
+
+input TerrainUpdateInput {
+  width: Float
+  height: Float
+  bgColor: ColorHex
 }
 
 type ConnectionResponse {
   token: Token
-  error: ErrorType
+  error: CustomError
   user: User
 }
 
@@ -385,10 +457,17 @@ type Token {
   refresh: String!
 }
 
-type ErrorType {
-  label: String!
-  message: String!
+input UserInput {
+  email: String
+  pseudo: String
+  admin: Boolean
+  premium: Boolean
 }
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
 
 input ConstInput {
   legume: LegumeConstInput
@@ -398,24 +477,24 @@ input ConstInput {
 
 input LegumeConstInput {
   label: String!
-  defaultBgColor: String!
+  defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
   description: String!
   cultureDesc: String!
   advices: [String!]!
-  plantMonth: [Int!]!
+  plantMonth: [Month!]!
   recolteDesc: String!
-  recolteMonth: [Int!]!
-  semisMonth: [Int!]!
+  recolteMonth: [Month!]!
+  semisMonth: [Month!]!
   soilDesc: String!
-  exposition: exposition!
+  exposition: Exposition!
 }
 
 input ArbreConstInput {
   label: String!
-  defaultBgColor: String!
+  defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
@@ -440,7 +519,7 @@ input ArbreConstInput {
   Give an array of months
   """
   tailleMonth: [Int!]!
-  rusticity: rusticity!
+  rusticity: Rusticity!
 
   """
   Description of the soil needed
@@ -451,27 +530,27 @@ input ArbreConstInput {
   Conseils sur les légumes
   """
   advices: [String!]
-  exposition: exposition!
+  exposition: Exposition!
 
   """
   Give an array of months
   """
-  plantMonth: [Int!]!
+  plantMonth: [Month!]!
 
   """
   Give an array of months
   """
-  recolteMonth: [Int!]!
+  recolteMonth: [Month!]!
 
   """
   Give an array of months
   """
-  semisMonth: [Int!]!
+  semisMonth: [Month!]!
 }
 
 input AromatConstInput {
   label: String!
-  defaultBgColor: String!
+  defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
   image: URL!
@@ -486,20 +565,20 @@ input AromatConstInput {
   Conseils sur les légumes
   """
   advices: [String!]
-  exposition: exposition!
+  exposition: Exposition!
 
   """
   Give an array of months
   """
-  plantMonth: [Int!]!
+  plantMonth: [Month!]!
 
   """
   Give an array of months
   """
-  recolteMonth: [Int!]!
+  recolteMonth: [Month!]!
 
   """
   Give an array of months
   """
-  semisMonth: [Int!]!
+  semisMonth: [Month!]!
 }

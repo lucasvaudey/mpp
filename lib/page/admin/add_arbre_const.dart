@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddArbreConst extends StatefulWidget {
-  static const String route = '/addArbreConst';
+  static const String route = '/adminpanel/addArbreConst';
   const AddArbreConst({Key? key}) : super(key: key);
 
   @override

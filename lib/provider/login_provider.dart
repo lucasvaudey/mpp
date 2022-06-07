@@ -21,8 +21,9 @@ class LoginProvider extends ChangeNotifier {
     final response = await _client.execute(
       ConnectionMutation(
         variables: ConnectionArguments(
-            emailOrUsername: emailController.text,
-            password: passwordController.text),
+          emailOrUsername: emailController.text,
+          password: passwordController.text,
+        ),
       ),
     );
     if (response.hasErrors) {
@@ -33,13 +34,15 @@ class LoginProvider extends ChangeNotifier {
     if (response.data != null) {
       if (response.data!.connect.token != null) {
         Token token = Token(
-            access: response.data!.connect.token!.access,
-            refresh: response.data!.connect.token!.access);
+          access: response.data!.connect.token!.access,
+          refresh: response.data!.connect.token!.access,
+        );
         User user = User(
-            id: response.data!.connect.user!.id,
-            pseudo: response.data!.connect.user!.pseudo,
-            email: response.data!.connect.user!.email,
-            token: token);
+          id: response.data!.connect.user!.id,
+          pseudo: response.data!.connect.user!.pseudo,
+          email: response.data!.connect.user!.email,
+          token: token,
+        );
         Hive.box<User>("user").put("current", user);
         Navigator.of(context)
             .pushNamedAndRemoveUntil(SplashScreen.route, (route) => false);

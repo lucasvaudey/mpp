@@ -83,35 +83,33 @@ class ConstElementAdapter extends TypeAdapter<ConstElement> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-ConstElement _$ConstElementFromJson(Map<String, dynamic> json) {
-  return ConstElement(
-    id: json['id'] as int,
-    baseHeight: (json['baseHeight'] as num).toDouble(),
-    baseWidth: (json['baseWidth'] as num).toDouble(),
-    defaultBgColor: json['defaultBgColor'] as String,
-    description: json['description'] as String,
-    image: json['image'] as String,
-    label: json['label'] as String,
-    exposition: _$enumDecode(_$HiveExpositionEnumMap, json['exposition']),
-    advices:
-        (json['advices'] as List<dynamic>?)?.map((e) => e as String).toList(),
-    sickness: (json['sickness'] as List<dynamic>?)
-        ?.map((e) => Sickness.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    varieties: (json['varieties'] as List<dynamic>?)
-        ?.map((e) => Variety.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    plantMonth: (json['plantMonth'] as List<dynamic>?)
-        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
-        .toList(),
-    semisMonth: (json['semisMonth'] as List<dynamic>?)
-        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
-        .toList(),
-    recolteMonth: (json['recolteMonth'] as List<dynamic>?)
-        ?.map((e) => _$enumDecode(_$HiveMonthEnumMap, e))
-        .toList(),
-  );
-}
+ConstElement _$ConstElementFromJson(Map<String, dynamic> json) => ConstElement(
+      id: json['id'] as int,
+      baseHeight: (json['baseHeight'] as num).toDouble(),
+      baseWidth: (json['baseWidth'] as num).toDouble(),
+      defaultBgColor: json['defaultBgColor'] as String,
+      description: json['description'] as String,
+      image: json['image'] as String,
+      label: json['label'] as String,
+      exposition: $enumDecode(_$HiveExpositionEnumMap, json['exposition']),
+      advices:
+          (json['advices'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      sickness: (json['sickness'] as List<dynamic>?)
+          ?.map((e) => Sickness.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      varieties: (json['varieties'] as List<dynamic>?)
+          ?.map((e) => Variety.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      plantMonth: (json['plantMonth'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$HiveMonthEnumMap, e))
+          .toList(),
+      semisMonth: (json['semisMonth'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$HiveMonthEnumMap, e))
+          .toList(),
+      recolteMonth: (json['recolteMonth'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$HiveMonthEnumMap, e))
+          .toList(),
+    );
 
 Map<String, dynamic> _$ConstElementToJson(ConstElement instance) {
   final val = <String, dynamic>{
@@ -141,32 +139,6 @@ Map<String, dynamic> _$ConstElementToJson(ConstElement instance) {
   writeNotNull('recolteMonth',
       instance.recolteMonth?.map((e) => _$HiveMonthEnumMap[e]).toList());
   return val;
-}
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
 }
 
 const _$HiveExpositionEnumMap = {

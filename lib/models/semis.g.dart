@@ -44,11 +44,9 @@ class SemisAdapter extends TypeAdapter<Semis> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Semis _$SemisFromJson(Map<String, dynamic> json) {
-  return Semis(
-    id: json['id'] as int,
-  );
-}
+Semis _$SemisFromJson(Map<String, dynamic> json) => Semis(
+      id: json['id'] as int,
+    );
 
 Map<String, dynamic> _$SemisToJson(Semis instance) => <String, dynamic>{
       'id': instance.id,
