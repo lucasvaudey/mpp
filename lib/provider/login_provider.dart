@@ -1,6 +1,7 @@
 import 'package:artemis/artemis.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/app.dart';
 import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/models/token.dart';
@@ -9,16 +10,16 @@ import 'package:mpp/page/splash_screen.dart';
 
 class LoginProvider extends ChangeNotifier {
   late BuildContext context;
-  LoginProvider(BuildContext _context) {
-    context = _context;
+  LoginProvider(BuildContext ctx) {
+    context = ctx;
   }
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   Future<void> signIn() async {
-    ArtemisClient _client = getClient(null);
-    final response = await _client.execute(
+    ArtemisClient client = getClient(null);
+    final response = await client.execute(
       ConnectionMutation(
         variables: ConnectionArguments(
           emailOrUsername: emailController.text,
@@ -44,7 +45,7 @@ class LoginProvider extends ChangeNotifier {
           token: token,
         );
         Hive.box<User>("user").put("current", user);
-        Navigator.of(context)
+        Navigator.of(navigatorKey.currentContext ?? context)
             .pushNamedAndRemoveUntil(SplashScreen.route, (route) => false);
       }
     }

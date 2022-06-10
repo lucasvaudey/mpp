@@ -5,7 +5,7 @@ class AddAromatConst extends StatefulWidget {
   const AddAromatConst({Key? key}) : super(key: key);
 
   @override
-  _AddAromatConstState createState() => _AddAromatConstState();
+  State<AddAromatConst> createState() => _AddAromatConstState();
 }
 
 class _AddAromatConstState extends State<AddAromatConst> {

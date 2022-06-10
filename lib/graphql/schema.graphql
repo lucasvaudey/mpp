@@ -364,16 +364,16 @@ type Mutation {
     constId: Float!
     terrainId: Float!
     placeable: PlaceableInput!
-  ): BoolResponse!
+  ): Boolean!
   addCustomPlaceable(
     terrainId: Float!
     placeable: PlaceableInput!
   ): BoolResponse!
-  removePlaceable(id: Float!): BoolResponse!
-  updatePlaceable(input: PlaceableInput!, placeableID: Float!): BoolResponse!
+  removePlaceable(id: Float!): Boolean!
+  updatePlaceable(input: PlaceableInput!, placeableID: Float!): Boolean!
   addTerrain(terrain: TerrainInput!): Boolean!
   removeTerrain(id: ID!): Boolean!
-  updateTerrain(id: ID!, input: TerrainUpdateInput!): BoolResponse!
+  updateTerrain(id: ID!, input: TerrainUpdateInput!): Boolean!
   addReminder(notifInput: ReminderInput!, placeableId: Float!): BoolResponse!
   deleteReminder(reminderId: Float!): BoolResponse!
   updateReminder(input: ReminderInput!, reminderId: Float!): BoolResponse!
@@ -399,16 +399,6 @@ type Mutation {
   updateConst(id: Int!, input: ConstInput!): Boolean!
 }
 
-type BoolResponse {
-  success: Boolean!
-  error: CustomError
-}
-
-type CustomError {
-  label: String!
-  message: String!
-}
-
 input PlaceableInput {
   label: String
   bgColor: ColorHex
@@ -432,6 +422,16 @@ input ReminderInput {
 input PlannedNotifInput {
   date: DateTime!
   scheduled: Boolean!
+}
+
+type BoolResponse {
+  success: Boolean!
+  error: CustomError
+}
+
+type CustomError {
+  label: String!
+  message: String!
 }
 
 input TerrainInput {
@@ -480,7 +480,6 @@ input LegumeConstInput {
   defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
-  image: URL!
   description: String!
   cultureDesc: String!
   advices: [String!]!
@@ -497,7 +496,6 @@ input ArbreConstInput {
   defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
-  image: URL!
   description: String!
 
   """
@@ -553,7 +551,6 @@ input AromatConstInput {
   defaultBgColor: ColorHex!
   baseHeight: Float!
   baseWidth: Float!
-  image: URL!
   description: String!
 
   """

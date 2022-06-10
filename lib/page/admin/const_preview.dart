@@ -4,14 +4,24 @@ import 'package:mpp/models/const/const_element.dart';
 import 'package:mpp/provider/admin_provider.dart';
 import 'package:provider/provider.dart';
 
-class ConstPreview extends StatelessWidget {
+class ConstPreview extends StatefulWidget {
   final ConstElement element;
   const ConstPreview({Key? key, required this.element}) : super(key: key);
 
   @override
+  State<ConstPreview> createState() => _ConstPreviewState();
+}
+
+class _ConstPreviewState extends State<ConstPreview> {
+  bool isDeleting = false;
+  @override
   Widget build(BuildContext context) {
-    print(element.image);
     return Consumer<AdminProvider>(builder: (context, provider, _) {
+      if (isDeleting) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
       return Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 1.h),
@@ -20,19 +30,27 @@ class ConstPreview extends StatelessWidget {
           children: [
             Column(
               children: [
-                Text(element.id.toString()),
-                Text(element.label),
-                Text("${element.baseHeight} hauteur en cm"),
-                Text("${element.baseWidth} largeur en cm"),
-                if (element.advices != null) Text("Conseils :"),
-                for (String advice in element.advices ?? []) Text(advice),
-                Text("${element.description} "),
-                Image.network(element.image, width: 300.w),
+                Text(widget.element.id.toString()),
+                Text(widget.element.label),
+                Text("${widget.element.baseHeight} hauteur en cm"),
+                Text("${widget.element.baseWidth} largeur en cm"),
+                if (widget.element.advices != null) const Text("Conseils :"),
+                for (String advice in widget.element.advices ?? [])
+                  Text(advice),
+                Text("${widget.element.description} "),
+                Image.network(widget.element.image, width: 300.w),
               ],
             ),
             IconButton(
-              onPressed: () {
-                provider.removeConst(element.id);
+              onPressed: () async {
+                setState(() {
+                  isDeleting = true;
+                });
+                if (await provider.removeConst(widget.element.id)) {
+                  setState(() {
+                    isDeleting = false;
+                  });
+                }
               },
               icon: const Icon(Icons.remove_circle_outline),
               color: Colors.red,

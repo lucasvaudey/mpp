@@ -1,6 +1,7 @@
 import 'package:artemis/artemis.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -76,7 +77,7 @@ class AdminProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addLegumeConst() async {
+  Future<void> addConst(ConstInput input) async {
     if (file != null) {
       if (!kIsWeb) {
         multipartFile = await MultipartFile.fromPath(
@@ -84,36 +85,11 @@ class AdminProvider extends ChangeNotifier {
           file!.path,
         );
       }
+
       User user = Hive.box<User>('user').get('current')!;
       GraphQLClient client = getUploadClient(user.token.access);
       AddConstArguments arg = AddConstArguments(
-        constant: ConstInput(
-          legume: LegumeConstInput(
-            advices: ["Bien !"],
-            baseHeight: 50,
-            baseWidth: 50,
-            cultureDesc: "culture Desc ! Description !",
-            defaultBgColor: '#FFA500',
-            description: 'Descritption !',
-            exposition: Exposition.soleil,
-            image: 'https://google.com',
-            label: 'Patate',
-            plantMonth: [
-              Month.aout,
-              Month.juin,
-            ],
-            recolteDesc: 'Recolte desc !',
-            recolteMonth: [
-              Month.aout,
-              Month.juin,
-            ],
-            semisMonth: [
-              Month.aout,
-              Month.juin,
-            ],
-            soilDesc: 'Soil Desck !',
-          ),
-        ),
+        constant: input,
         image: multipartFile!,
       );
       final response = await client.mutate(
@@ -123,11 +99,14 @@ class AdminProvider extends ChangeNotifier {
           fetchPolicy: FetchPolicy.noCache,
         ),
       );
-      print(response);
+      if (response.hasException) {
+        ScaffoldMessenger.of(navigatorKey.currentContext!)
+            .showSnackBar(const SnackBar(content: Text("Erreur !")));
+      }
     }
   }
 
-  Future<void> removeConst(int id) async {
+  Future<bool> removeConst(int id) async {
     ArtemisClient client = getClient(user.token.access);
     final res = await client.execute(
       RemoveConstMutation(
@@ -136,8 +115,12 @@ class AdminProvider extends ChangeNotifier {
     );
     if (res.hasErrors || res.data?.removeConst is! bool) {
       if (await errorProcessing(res, () async => await removeConst(id))) {
-        return;
+        return true;
       }
+      return false;
     }
+    constants.remove(constants.firstWhere((element) => element.id == id));
+    notifyListeners();
+    return res.data!.removeConst;
   }
 }

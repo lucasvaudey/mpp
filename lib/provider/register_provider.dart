@@ -1,6 +1,7 @@
 import 'package:artemis/artemis.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/app.dart';
 import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/models/token.dart';
@@ -20,8 +21,8 @@ class RegisterProvider extends ChangeNotifier {
   ///
   ///@return true if the register success
   Future<void> register(String email, String pseudo, String mdp) async {
-    ArtemisClient _client = getClient(null);
-    final response = await _client.execute(
+    ArtemisClient client = getClient(null);
+    final response = await client.execute(
       RegisterMutation(
         variables:
             RegisterArguments(email: email, password: mdp, pseudo: pseudo),
@@ -40,7 +41,7 @@ class RegisterProvider extends ChangeNotifier {
       );
       Hive.box<User>('user').put('current', newUser);
       Navigator.pushNamedAndRemoveUntil(
-        context,
+        navigatorKey.currentContext ?? context,
         SplashScreen.route,
         (route) => false,
       );

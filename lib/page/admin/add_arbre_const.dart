@@ -5,7 +5,7 @@ class AddArbreConst extends StatefulWidget {
   const AddArbreConst({Key? key}) : super(key: key);
 
   @override
-  _AddArbreConstState createState() => _AddArbreConstState();
+  State<AddArbreConst> createState() => _AddArbreConstState();
 }
 
 class _AddArbreConstState extends State<AddArbreConst> {

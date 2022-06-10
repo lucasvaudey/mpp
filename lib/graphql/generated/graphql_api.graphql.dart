@@ -127,7 +127,6 @@ class LegumeConstInput extends JsonSerializable with EquatableMixin {
       required this.defaultBgColor,
       required this.baseHeight,
       required this.baseWidth,
-      required this.image,
       required this.description,
       required this.cultureDesc,
       required this.advices,
@@ -148,8 +147,6 @@ class LegumeConstInput extends JsonSerializable with EquatableMixin {
   late double baseHeight;
 
   late double baseWidth;
-
-  late String image;
 
   late String description;
 
@@ -179,7 +176,6 @@ class LegumeConstInput extends JsonSerializable with EquatableMixin {
         defaultBgColor,
         baseHeight,
         baseWidth,
-        image,
         description,
         cultureDesc,
         advices,
@@ -201,7 +197,6 @@ class ArbreConstInput extends JsonSerializable with EquatableMixin {
       required this.defaultBgColor,
       required this.baseHeight,
       required this.baseWidth,
-      required this.image,
       required this.description,
       required this.climatDesc,
       required this.tailleDesc,
@@ -225,8 +220,6 @@ class ArbreConstInput extends JsonSerializable with EquatableMixin {
   late double baseHeight;
 
   late double baseWidth;
-
-  late String image;
 
   late String description;
 
@@ -263,7 +256,6 @@ class ArbreConstInput extends JsonSerializable with EquatableMixin {
         defaultBgColor,
         baseHeight,
         baseWidth,
-        image,
         description,
         climatDesc,
         tailleDesc,
@@ -288,7 +280,6 @@ class AromatConstInput extends JsonSerializable with EquatableMixin {
       required this.defaultBgColor,
       required this.baseHeight,
       required this.baseWidth,
-      required this.image,
       required this.description,
       required this.soilDesc,
       this.advices,
@@ -307,8 +298,6 @@ class AromatConstInput extends JsonSerializable with EquatableMixin {
   late double baseHeight;
 
   late double baseWidth;
-
-  late String image;
 
   late String description;
 
@@ -334,7 +323,6 @@ class AromatConstInput extends JsonSerializable with EquatableMixin {
         defaultBgColor,
         baseHeight,
         baseWidth,
-        image,
         description,
         soilDesc,
         advices,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/models/enums/hive_month.dart';
 import 'package:mpp/provider/admin_provider.dart';
 import 'package:provider/provider.dart';
@@ -105,7 +106,35 @@ class _AddLegumeConstState extends State<AddLegumeConst> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => provider.addLegumeConst(),
+                        onPressed: () {
+                          ConstInput arg = ConstInput(
+                            legume: LegumeConstInput(
+                              advices: ["Bien !"],
+                              baseHeight: 50,
+                              baseWidth: 50,
+                              cultureDesc: "culture Desc ! Description !",
+                              defaultBgColor: '#FFA500',
+                              description: 'Descritption !',
+                              exposition: Exposition.soleil,
+                              label: 'Patate',
+                              plantMonth: [
+                                Month.aout,
+                                Month.juin,
+                              ],
+                              recolteDesc: 'Recolte desc !',
+                              recolteMonth: [
+                                Month.aout,
+                                Month.juin,
+                              ],
+                              semisMonth: [
+                                Month.aout,
+                                Month.juin,
+                              ],
+                              soilDesc: 'Soil Desck !',
+                            ),
+                          );
+                          provider.addConst(arg);
+                        },
                         child: const Text("Valider !"),
                       ),
                     ],

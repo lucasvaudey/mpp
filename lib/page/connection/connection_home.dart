@@ -14,7 +14,7 @@ class ConnectionHome extends StatefulWidget {
   const ConnectionHome({Key? key}) : super(key: key);
 
   @override
-  _ConnectionHomeState createState() => _ConnectionHomeState();
+  State<ConnectionHome> createState() => _ConnectionHomeState();
 }
 
 class _ConnectionHomeState extends State<ConnectionHome> {

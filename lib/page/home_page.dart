@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                   (route) => false,
                 );
               },
-              child: const Text("Déconnexion"),
+              child: const Text("Deconnexion"),
             ),
             if (user.admin)
               TextButton(

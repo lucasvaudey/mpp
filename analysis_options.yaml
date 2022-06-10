@@ -11,6 +11,7 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
+    - lib/generated_plugin_registrant.dart
     - lib/graphql/generated/**
     - lib/graphql/generated/graphql_api.graphql.dart
   plugins:

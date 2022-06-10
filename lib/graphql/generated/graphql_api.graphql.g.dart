@@ -58,7 +58,6 @@ LegumeConstInput _$LegumeConstInputFromJson(Map<String, dynamic> json) =>
       defaultBgColor: json['defaultBgColor'] as String,
       baseHeight: (json['baseHeight'] as num).toDouble(),
       baseWidth: (json['baseWidth'] as num).toDouble(),
-      image: json['image'] as String,
       description: json['description'] as String,
       cultureDesc: json['cultureDesc'] as String,
       advices:
@@ -87,7 +86,6 @@ Map<String, dynamic> _$LegumeConstInputToJson(LegumeConstInput instance) =>
       'defaultBgColor': instance.defaultBgColor,
       'baseHeight': instance.baseHeight,
       'baseWidth': instance.baseWidth,
-      'image': instance.image,
       'description': instance.description,
       'cultureDesc': instance.cultureDesc,
       'advices': instance.advices,
@@ -129,7 +127,6 @@ ArbreConstInput _$ArbreConstInputFromJson(Map<String, dynamic> json) =>
       defaultBgColor: json['defaultBgColor'] as String,
       baseHeight: (json['baseHeight'] as num).toDouble(),
       baseWidth: (json['baseWidth'] as num).toDouble(),
-      image: json['image'] as String,
       description: json['description'] as String,
       climatDesc: json['climatDesc'] as String,
       tailleDesc: json['tailleDesc'] as String,
@@ -163,7 +160,6 @@ Map<String, dynamic> _$ArbreConstInputToJson(ArbreConstInput instance) {
     'defaultBgColor': instance.defaultBgColor,
     'baseHeight': instance.baseHeight,
     'baseWidth': instance.baseWidth,
-    'image': instance.image,
     'description': instance.description,
     'climatDesc': instance.climatDesc,
     'tailleDesc': instance.tailleDesc,
@@ -203,7 +199,6 @@ AromatConstInput _$AromatConstInputFromJson(Map<String, dynamic> json) =>
       defaultBgColor: json['defaultBgColor'] as String,
       baseHeight: (json['baseHeight'] as num).toDouble(),
       baseWidth: (json['baseWidth'] as num).toDouble(),
-      image: json['image'] as String,
       description: json['description'] as String,
       soilDesc: json['soilDesc'] as String,
       advices:
@@ -230,7 +225,6 @@ Map<String, dynamic> _$AromatConstInputToJson(AromatConstInput instance) {
     'defaultBgColor': instance.defaultBgColor,
     'baseHeight': instance.baseHeight,
     'baseWidth': instance.baseWidth,
-    'image': instance.image,
     'description': instance.description,
     'soilDesc': instance.soilDesc,
   };

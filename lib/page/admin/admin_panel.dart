@@ -32,10 +32,15 @@ class _AdminPanelState extends State<AdminPanel> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AddLegumeConst.route,
-                            arguments: provider);
+                        Navigator.pushNamed(
+                          context,
+                          AddLegumeConst.route,
+                          arguments: provider,
+                        );
                       },
-                      child: const Text("Ajouter un légume"),
+                      child: const Text(
+                        "Ajouter un legume",
+                      ),
                     ),
                     TextButton(
                       onPressed: () {

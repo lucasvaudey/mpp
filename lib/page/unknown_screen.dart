@@ -8,7 +8,7 @@ class UnknownScreen extends StatefulWidget {
   const UnknownScreen({Key? key}) : super(key: key);
 
   @override
-  _UnknownScreenState createState() => _UnknownScreenState();
+  State<UnknownScreen> createState() => _UnknownScreenState();
 }
 
 class _UnknownScreenState extends State<UnknownScreen> {
