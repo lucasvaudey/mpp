@@ -348,6 +348,81 @@ class AromatConstInput extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class RefreshToken$Mutation$RefreshToken$Token extends JsonSerializable
+    with EquatableMixin {
+  RefreshToken$Mutation$RefreshToken$Token();
+
+  factory RefreshToken$Mutation$RefreshToken$Token.fromJson(
+          Map<String, dynamic> json) =>
+      _$RefreshToken$Mutation$RefreshToken$TokenFromJson(json);
+
+  late String refresh;
+
+  late String access;
+
+  @override
+  List<Object?> get props => [refresh, access];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$RefreshToken$Mutation$RefreshToken$TokenToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class RefreshToken$Mutation$RefreshToken$Error extends JsonSerializable
+    with EquatableMixin {
+  RefreshToken$Mutation$RefreshToken$Error();
+
+  factory RefreshToken$Mutation$RefreshToken$Error.fromJson(
+          Map<String, dynamic> json) =>
+      _$RefreshToken$Mutation$RefreshToken$ErrorFromJson(json);
+
+  late String label;
+
+  late String message;
+
+  @override
+  List<Object?> get props => [label, message];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$RefreshToken$Mutation$RefreshToken$ErrorToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class RefreshToken$Mutation$RefreshToken extends JsonSerializable
+    with EquatableMixin {
+  RefreshToken$Mutation$RefreshToken();
+
+  factory RefreshToken$Mutation$RefreshToken.fromJson(
+          Map<String, dynamic> json) =>
+      _$RefreshToken$Mutation$RefreshTokenFromJson(json);
+
+  RefreshToken$Mutation$RefreshToken$Token? token;
+
+  RefreshToken$Mutation$RefreshToken$Error? error;
+
+  @override
+  List<Object?> get props => [token, error];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$RefreshToken$Mutation$RefreshTokenToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class RefreshToken$Mutation extends JsonSerializable with EquatableMixin {
+  RefreshToken$Mutation();
+
+  factory RefreshToken$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$RefreshToken$MutationFromJson(json);
+
+  late RefreshToken$Mutation$RefreshToken refreshToken;
+
+  @override
+  List<Object?> get props => [refreshToken];
+  @override
+  Map<String, dynamic> toJson() => _$RefreshToken$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class Connection$Mutation$Connect$Token extends JsonSerializable
     with EquatableMixin {
   Connection$Mutation$Connect$Token();
@@ -1462,6 +1537,79 @@ class AddConstMutation
   @override
   AddConst$Mutation parse(Map<String, dynamic> json) =>
       AddConst$Mutation.fromJson(json);
+}
+
+final REFRESH_TOKEN_MUTATION_DOCUMENT_OPERATION_NAME = 'RefreshToken';
+final REFRESH_TOKEN_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'RefreshToken'),
+      variableDefinitions: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'refreshToken'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'token'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'refresh'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'access'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: 'error'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'label'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'message'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ]))
+            ]))
+      ]))
+]);
+
+class RefreshTokenMutation
+    extends GraphQLQuery<RefreshToken$Mutation, JsonSerializable> {
+  RefreshTokenMutation();
+
+  @override
+  final DocumentNode document = REFRESH_TOKEN_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName = REFRESH_TOKEN_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  RefreshToken$Mutation parse(Map<String, dynamic> json) =>
+      RefreshToken$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)

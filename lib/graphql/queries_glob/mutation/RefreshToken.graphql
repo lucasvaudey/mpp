@@ -1,0 +1,12 @@
+mutation RefreshToken {
+  refreshToken {
+    token {
+      refresh
+      access
+    }
+    error {
+      label
+      message
+    }
+  }
+}

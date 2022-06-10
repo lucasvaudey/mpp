@@ -3,9 +3,10 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/widgets.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mpp/app.dart';
+import 'package:mpp/graphql/error_handling.dart';
 import 'package:mpp/graphql/graphql.dart';
 import 'package:mpp/graphql/generated/graphql_api.graphql.dart';
 import 'package:mpp/models/const/const_element.dart';
@@ -123,6 +124,20 @@ class AdminProvider extends ChangeNotifier {
         ),
       );
       print(response);
+    }
+  }
+
+  Future<void> removeConst(int id) async {
+    ArtemisClient client = getClient(user.token.access);
+    final res = await client.execute(
+      RemoveConstMutation(
+        variables: RemoveConstArguments(id: id),
+      ),
+    );
+    if (res.hasErrors || res.data?.removeConst is! bool) {
+      if (await errorProcessing(res, () async => await removeConst(id))) {
+        return;
+      }
     }
   }
 }

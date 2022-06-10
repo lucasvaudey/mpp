@@ -5,7 +5,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mpp/const/string.dart';
 
 ArtemisClient getClient(String? token) {
-  print(token);
   Dio dio = Dio()
     ..interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {

@@ -252,6 +252,73 @@ Map<String, dynamic> _$AromatConstInputToJson(AromatConstInput instance) {
   return val;
 }
 
+RefreshToken$Mutation$RefreshToken$Token
+    _$RefreshToken$Mutation$RefreshToken$TokenFromJson(
+            Map<String, dynamic> json) =>
+        RefreshToken$Mutation$RefreshToken$Token()
+          ..refresh = json['refresh'] as String
+          ..access = json['access'] as String;
+
+Map<String, dynamic> _$RefreshToken$Mutation$RefreshToken$TokenToJson(
+        RefreshToken$Mutation$RefreshToken$Token instance) =>
+    <String, dynamic>{
+      'refresh': instance.refresh,
+      'access': instance.access,
+    };
+
+RefreshToken$Mutation$RefreshToken$Error
+    _$RefreshToken$Mutation$RefreshToken$ErrorFromJson(
+            Map<String, dynamic> json) =>
+        RefreshToken$Mutation$RefreshToken$Error()
+          ..label = json['label'] as String
+          ..message = json['message'] as String;
+
+Map<String, dynamic> _$RefreshToken$Mutation$RefreshToken$ErrorToJson(
+        RefreshToken$Mutation$RefreshToken$Error instance) =>
+    <String, dynamic>{
+      'label': instance.label,
+      'message': instance.message,
+    };
+
+RefreshToken$Mutation$RefreshToken _$RefreshToken$Mutation$RefreshTokenFromJson(
+        Map<String, dynamic> json) =>
+    RefreshToken$Mutation$RefreshToken()
+      ..token = json['token'] == null
+          ? null
+          : RefreshToken$Mutation$RefreshToken$Token.fromJson(
+              json['token'] as Map<String, dynamic>)
+      ..error = json['error'] == null
+          ? null
+          : RefreshToken$Mutation$RefreshToken$Error.fromJson(
+              json['error'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$RefreshToken$Mutation$RefreshTokenToJson(
+    RefreshToken$Mutation$RefreshToken instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('token', instance.token?.toJson());
+  writeNotNull('error', instance.error?.toJson());
+  return val;
+}
+
+RefreshToken$Mutation _$RefreshToken$MutationFromJson(
+        Map<String, dynamic> json) =>
+    RefreshToken$Mutation()
+      ..refreshToken = RefreshToken$Mutation$RefreshToken.fromJson(
+          json['refreshToken'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$RefreshToken$MutationToJson(
+        RefreshToken$Mutation instance) =>
+    <String, dynamic>{
+      'refreshToken': instance.refreshToken.toJson(),
+    };
+
 Connection$Mutation$Connect$Token _$Connection$Mutation$Connect$TokenFromJson(
         Map<String, dynamic> json) =>
     Connection$Mutation$Connect$Token()
