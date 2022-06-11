@@ -8,6 +8,7 @@ import 'package:mpp/page/home/profil.dart';
 import 'package:mpp/page/home/semis_planner.dart';
 import 'package:mpp/page/home/social.dart';
 import 'package:mpp/page/splash_screen.dart';
+import 'package:mpp/provider/garden_provider.dart';
 import 'package:mpp/provider/home_provider.dart';
 import 'package:mpp/widgets/custom_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +25,15 @@ class _HomePageState extends State<HomePage> {
   User user = Hive.box<User>('user').get('current')!;
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => HomeProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => HomeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GardenProvider(),
+        ),
+      ],
       child: Consumer<HomeProvider>(builder: (context, provider, _) {
         return Scaffold(
           bottomNavigationBar: const CustomNavigationBar(),
