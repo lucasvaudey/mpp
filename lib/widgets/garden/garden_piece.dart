@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 class GardenPiece extends StatefulWidget {
   final Size size;
   final Offset offset;
-  const GardenPiece({Key? key, required this.size, required this.offset})
-      : super(key: key);
+  const GardenPiece({
+    Key? key,
+    required this.size,
+    required this.offset,
+  }) : super(key: key);
 
   @override
   State<GardenPiece> createState() => _GardenPieceState();
@@ -15,6 +18,7 @@ class _GardenPieceState extends State<GardenPiece>
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         // Transform.translate(
         //   offset: const Offset(0, 10),

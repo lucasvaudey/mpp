@@ -27,7 +27,7 @@ class _GardenState extends State<Garden> with TickerProviderStateMixin {
     animation11 = Tween<double>(begin: 1, end: 0.5).animate(controller!);
     animation10 = Tween<double>(begin: 0, end: -0.5).animate(controller!);
 
-    controller?.forward();
+    controller?.repeat(reverse: true);
     super.initState();
   }
 
@@ -42,8 +42,7 @@ class _GardenState extends State<Garden> with TickerProviderStateMixin {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller?.reset();
-          controller?.forward();
+          controller?.reverse();
         },
         child: Icon(Icons.redo),
       ),
@@ -61,21 +60,28 @@ class _GardenState extends State<Garden> with TickerProviderStateMixin {
                 ..setEntry(0, 1, animation01.value)
                 ..setEntry(1, 1, animation11.value),
               child: Stack(
-                children: const [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: GardenPiece(
-                      size: Size(100, 50),
-                      offset: Offset(0, 0),
-                    ),
-                  ),
+                clipBehavior: Clip.none,
+                children: [
                   Positioned(
                     top: 50,
                     left: 100,
                     child: GardenPiece(
-                      size: Size(50, 50),
-                      offset: Offset(0, 0),
+                      size: const Size(50, 50),
+                      offset: Offset(
+                        animation01.value * -10,
+                        animation01.value * 10,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 100,
+                    left: 150,
+                    child: GardenPiece(
+                      size: const Size(60, 500),
+                      offset: Offset(
+                        animation01.value * -10,
+                        animation01.value * 10,
+                      ),
                     ),
                   ),
                 ],
