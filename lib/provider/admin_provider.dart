@@ -73,7 +73,7 @@ class AdminProvider extends ChangeNotifier {
         multipartFile =
             MultipartFile.fromBytes('file', result.files.single.bytes!);
       }
-      print(file);
+      //TODO: handle mobile support
     }
   }
 
@@ -100,6 +100,7 @@ class AdminProvider extends ChangeNotifier {
         ),
       );
       if (response.hasException) {
+        debugPrint(response.exception.toString());
         ScaffoldMessenger.of(navigatorKey.currentContext!)
             .showSnackBar(const SnackBar(content: Text("Erreur !")));
       }

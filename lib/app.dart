@@ -44,6 +44,7 @@ class App extends StatelessWidget {
               title: 'Mon petit Potager',
               theme: ThemeData(
                 useMaterial3: true,
+                colorSchemeSeed: const Color(0xFF679D5A),
               ),
               home: const SplashScreen(),
             );

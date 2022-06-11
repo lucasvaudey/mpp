@@ -19,6 +19,9 @@ class _AddLegumeConstState extends State<AddLegumeConst> {
   final TextEditingController _baseWidth = TextEditingController();
   final TextEditingController _cultureDesc = TextEditingController();
   final TextEditingController _soilDesc = TextEditingController();
+  final TextEditingController _recolteDesc = TextEditingController();
+  final TextEditingController _desc = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as AdminProvider;
@@ -28,121 +31,152 @@ class _AddLegumeConstState extends State<AddLegumeConst> {
         appBar: AppBar(
           title: const Text("Ajouter un legume"),
         ),
-        body: Consumer<AdminProvider>(
-          builder: (context, provider, _) {
-            return SingleChildScrollView(
-              child: Form(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _label,
-                        decoration: const InputDecoration(
-                          label: Text("label"),
+        body: WillPopScope(
+          onWillPop: () async {
+            if (isLoading) {
+              return false;
+            }
+            return true;
+          },
+          child: Consumer<AdminProvider>(
+            builder: (context, provider, _) {
+              return SingleChildScrollView(
+                child: Form(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: _label,
+                          decoration: const InputDecoration(
+                            label: Text("label"),
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _defaultColor,
-                        decoration: const InputDecoration(
-                          label: Text("defaultBgColor"),
+                        TextFormField(
+                          controller: _defaultColor,
+                          decoration: const InputDecoration(
+                            label: Text("defaultBgColor"),
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _baseHeight,
-                        decoration: const InputDecoration(
-                          label: Text("baseHeight"),
+                        TextFormField(
+                          controller: _baseHeight,
+                          decoration: const InputDecoration(
+                            label: Text("baseHeight"),
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _baseWidth,
-                        decoration: const InputDecoration(
-                          label: Text("baseWidth"),
+                        TextFormField(
+                          controller: _baseWidth,
+                          decoration: const InputDecoration(
+                            label: Text("baseWidth"),
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _cultureDesc,
-                        decoration: const InputDecoration(
-                          label: Text("cultureDesc"),
+                        TextFormField(
+                          controller: _cultureDesc,
+                          decoration: const InputDecoration(
+                            label: Text("cultureDesc"),
+                          ),
                         ),
-                      ),
-                      //TODO array selector
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text("Advices"),
+                        //TODO array selector
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            label: Text("Advices"),
+                          ),
                         ),
-                      ),
-                      //TODO: Update a container with the specified month upside
-                      DropdownButton<HiveMonth>(
-                        items: const [DropdownMenuItem(child: Text("Janvier"))],
-                        onChanged: (value) {},
-                      ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text("recolteMonth"),
+                        //TODO: Update a container with the specified month upside
+                        DropdownButton<HiveMonth>(
+                          items: const [
+                            DropdownMenuItem(child: Text("Janvier")),
+                          ],
+                          onChanged: (value) {},
                         ),
-                      ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text("semisMonth"),
+                        TextFormField(
+                          controller: _desc,
+                          decoration: const InputDecoration(
+                            label: Text("Description"),
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _soilDesc,
-                        decoration: const InputDecoration(
-                          label: Text("SoilDesc"),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            label: Text("recolteMonth"),
+                          ),
                         ),
-                      ),
-                      //TODO: Choose enum
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          label: Text("Exposition"),
+                        TextFormField(
+                          controller: _recolteDesc,
+                          decoration: const InputDecoration(
+                            label: Text("Recolte desc"),
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () => provider.pickImage(),
-                        child: const Text(
-                          "Selectionner une image",
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            label: Text("semisMonth"),
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          ConstInput arg = ConstInput(
-                            legume: LegumeConstInput(
-                              advices: ["Bien !"],
-                              baseHeight: 50,
-                              baseWidth: 50,
-                              cultureDesc: "culture Desc ! Description !",
-                              defaultBgColor: '#FFA500',
-                              description: 'Descritption !',
-                              exposition: Exposition.soleil,
-                              label: 'Patate',
-                              plantMonth: [
-                                Month.aout,
-                                Month.juin,
-                              ],
-                              recolteDesc: 'Recolte desc !',
-                              recolteMonth: [
-                                Month.aout,
-                                Month.juin,
-                              ],
-                              semisMonth: [
-                                Month.aout,
-                                Month.juin,
-                              ],
-                              soilDesc: 'Soil Desck !',
-                            ),
-                          );
-                          provider.addConst(arg);
-                        },
-                        child: const Text("Valider !"),
-                      ),
-                    ],
+                        TextFormField(
+                          controller: _soilDesc,
+                          decoration: const InputDecoration(
+                            label: Text("SoilDesc"),
+                          ),
+                        ),
+                        //TODO: Choose enum
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            label: Text("Exposition"),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => provider.pickImage(),
+                          child: const Text(
+                            "Selectionner une image",
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            if (isLoading) {
+                              return;
+                            }
+                            setState(() {
+                              isLoading = true;
+                            });
+                            ConstInput arg = ConstInput(
+                              legume: LegumeConstInput(
+                                advices: ["Bien !"],
+                                baseHeight: double.parse(_baseHeight.text),
+                                baseWidth: double.parse(_baseWidth.text),
+                                cultureDesc: _cultureDesc.text,
+                                defaultBgColor: _defaultColor.text,
+                                description: _desc.text,
+                                exposition: Exposition.soleil,
+                                label: _label.text,
+                                plantMonth: [
+                                  Month.aout,
+                                  Month.juin,
+                                ],
+                                recolteDesc: _recolteDesc.text,
+                                recolteMonth: [
+                                  Month.aout,
+                                  Month.juin,
+                                ],
+                                semisMonth: [
+                                  Month.aout,
+                                  Month.juin,
+                                ],
+                                soilDesc: _soilDesc.text,
+                              ),
+                            );
+                            await provider.addConst(arg);
+                            setState(() {
+                              isLoading = false;
+                            });
+                          },
+                          child: const Text("Valider !"),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
