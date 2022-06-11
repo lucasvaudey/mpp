@@ -12,28 +12,23 @@ class _GardenState extends State<Garden> with TickerProviderStateMixin {
   late Animation<double> animation10;
   late Animation<double> animation01;
   late Animation<double> animation11;
-  AnimationController? controller;
-  Matrix4 endMatrix = Matrix4.identity()
-    ..setEntry(0, 0, 1)
-    ..setEntry(1, 0, -0.5)
-    ..setEntry(0, 1, 1)
-    ..setEntry(1, 1, 0.5);
+  late AnimationController controller;
+  bool isIsoMetric = false;
 
   @override
   void initState() {
     controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    animation01 = Tween<double>(begin: 0, end: 1).animate(controller!);
-    animation11 = Tween<double>(begin: 1, end: 0.5).animate(controller!);
-    animation10 = Tween<double>(begin: 0, end: -0.5).animate(controller!);
-
-    controller?.repeat(reverse: true);
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    animation01 = Tween<double>(begin: 0, end: 1).animate(controller);
+    animation11 = Tween<double>(begin: 1, end: 0.5).animate(controller);
+    animation10 = Tween<double>(begin: 0, end: -0.5).animate(controller);
+    controller.forward().then((value) => isIsoMetric = true);
     super.initState();
   }
 
   @override
   void dispose() {
-    controller?.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -42,18 +37,26 @@ class _GardenState extends State<Garden> with TickerProviderStateMixin {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller?.reverse();
+          if (isIsoMetric) {
+            isIsoMetric = false;
+            controller.reverse();
+          } else {
+            isIsoMetric = true;
+            // controller.reset();
+            controller.forward();
+          }
         },
-        child: Icon(Icons.redo),
+        child: const Icon(Icons.redo),
       ),
       body: InteractiveViewer(
         maxScale: 10,
         minScale: 0.4,
         boundaryMargin: const EdgeInsets.all(double.infinity),
         child: AnimatedBuilder(
-          animation: controller!,
+          animation: controller,
           builder: (context, anim) {
             return Transform(
+              alignment: Alignment.center,
               transform: Matrix4.identity()
                 ..setEntry(0, 0, 1)
                 ..setEntry(1, 0, animation10.value)

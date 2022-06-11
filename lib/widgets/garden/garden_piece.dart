@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class GardenPiece extends StatefulWidget {
@@ -15,35 +17,59 @@ class GardenPiece extends StatefulWidget {
 
 class _GardenPieceState extends State<GardenPiece>
     with TickerProviderStateMixin {
+  final invertedMatrix = Matrix4.identity()
+    ..setEntry(0, 0, 1)
+    ..setEntry(1, 0, -0.5)
+    ..setEntry(0, 1, 1)
+    ..setEntry(1, 1, 0.5)
+    ..invert();
   @override
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        // Transform.translate(
-        //   offset: const Offset(0, 10),
-        //   child: CustomPaint(
-        //     size: widget.size,
-        //     painter: IsomectricPlatform(Colors.brown),
-        //   ),
-        // ),
-        // CustomPaint(
-        //   size: widget.size,
-        //   painter: IsomectricPlatform(Theme.of(context).primaryColor),
-        // ),
         Transform.translate(
           offset: widget.offset,
-          child: Container(
-            width: widget.size.width,
-            height: widget.size.height,
-            color: Colors.brown,
-            child: Center(
-              child: Container(
-                width: widget.size.width / 2,
-                height: widget.size.height / 2,
-                color: Theme.of(context).secondaryHeaderColor,
+          child: Stack(
+            children: [
+              Transform(
+                transform: Matrix4.identity(),
+                child: Material(
+                  elevation: 30,
+                  child: Container(
+                    width: widget.size.width,
+                    height: widget.size.height,
+                    color: Colors.brown,
+                  ),
+                ),
               ),
-            ),
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()
+                  ..translate(
+                    widget.offset.dy,
+                    0.0,
+                  ),
+                child: SizedBox(
+                  height: widget.size.height,
+                  width: widget.size.width,
+                  child: CustomPaint(
+                    painter: SailFloor(Colors.brown),
+                  ),
+                ),
+              ),
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()..translate(0.0, widget.offset.dx),
+                child: SizedBox(
+                  height: widget.size.height,
+                  width: widget.size.width,
+                  child: CustomPaint(
+                    painter: SailFloor(Colors.brown),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Container(
@@ -58,25 +84,42 @@ class _GardenPieceState extends State<GardenPiece>
             ),
           ),
         ),
+        SizedBox(
+          height: widget.size.height,
+          width: widget.size.width,
+          child: Center(
+            child: Transform(
+              alignment: Alignment.center,
+              transform: invertedMatrix,
+              child: const Text(
+                "Je suis au milieu",
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
 }
 
-class IsomectricPlatform extends CustomPainter {
-  Color color = Colors.black;
-  IsomectricPlatform(this.color);
+class SailFloor extends CustomPainter {
+  Color color = Colors.red;
+
+  SailFloor(this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint();
-    paint.color = color;
+    double factor = 10;
     Path path = Path();
-    path.moveTo(0, size.height / 2);
-    path.lineTo(size.width / 2, 0);
-    path.lineTo(size.width, size.height / 2);
-    path.lineTo(size.width / 2, size.height);
-    path.lineTo(0, size.height / 2);
+    Paint paint = Paint()..color = color;
+    path.moveTo(factor, 0);
+    path.lineTo(size.width - factor, 0);
+    path.lineTo(size.width, factor);
+    path.lineTo(size.width, size.height - factor);
+    path.lineTo(size.width - factor, size.height);
+    path.lineTo(10, size.height);
+    path.lineTo(0, size.height - factor);
+    path.lineTo(0, 10);
     path.close();
     canvas.drawPath(path, paint);
   }
