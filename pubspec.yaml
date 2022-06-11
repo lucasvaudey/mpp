@@ -36,7 +36,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.0.0+2
-  flutter_svg: ^0.23.0+1
+  flutter_svg: ^1.1.0
+  graphx: ^1.0.4
   gql: ^0.13.0
   gql_dio_link: ^0.2.2
   graphql_flutter: null

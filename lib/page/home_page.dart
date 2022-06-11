@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mpp/models/user.dart';
 import 'package:mpp/page/admin/admin_panel.dart';
 import 'package:mpp/page/home/calendar.dart';
-import 'package:mpp/page/home/potager.dart';
+import 'package:mpp/page/home/garden.dart';
 import 'package:mpp/page/home/profil.dart';
 import 'package:mpp/page/home/semis_planner.dart';
 import 'package:mpp/page/home/social.dart';
@@ -30,12 +30,15 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           bottomNavigationBar: const CustomNavigationBar(),
           body: PageView(
+            physics: provider.index == 0
+                ? const NeverScrollableScrollPhysics()
+                : null,
             controller: provider.controller,
             onPageChanged: (int page) {
               provider.index = page;
             },
             children: const [
-              Potager(),
+              Garden(),
               Social(),
               Calendar(),
               SemisPlanner(),
